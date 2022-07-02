@@ -1,0 +1,151 @@
+# Nightly Windows builds
+
+name: winbuild
+
+on:
+  schedule:
+    - cron: "15 0 * * *"
+
+permissions:
+  contents: write
+
+concurrency: winbuild
+
+env:
+  GIT_AUTHOR_NAME: OpenSlide Automation
+  GIT_AUTHOR_EMAIL: openslide@openslide.org
+  GIT_COMMITTER_NAME: OpenSlide Automation
+  GIT_COMMITTER_EMAIL: openslide@openslide.org
+
+jobs:
+  setup:
+    name: Set up
+    runs-on: ubuntu-latest
+    outputs:
+      pkgver: ${{ steps.params.outputs.pkgver }}
+      openslide_commit: ${{ steps.params.outputs.openslide_commit }}
+      java_commit: ${{ steps.params.outputs.java_commit }}
+      winbuild_commit: ${{ steps.params.outputs.winbuild_commit }}
+      changed: ${{ steps.params.outputs.changed }}
+      stale: ${{ steps.params.outputs.stale }}
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v3
+      - name: Calculate parameters
+        id: params
+        run: |
+          set -euo pipefail
+          pkgver="$(date +%Y%m%d)-nightly"
+          echo "::set-output name=pkgver::$pkgver"
+          duplicate=$(jq ".builds[] | select(.pkgver == \"$pkgver\")" \
+              docs/windows/index.json)
+          if [ -n "$duplicate" ]; then
+              echo "Found existing nightly build $pkgver"
+              exit 1
+          fi
+          # Modify the repository at least every 30 days so GitHub doesn't
+          # disable the workflow
+          if [ $(( $(jq .last_update docs/windows/index.json) + 86400 * 30 )) -lt $(date +%s) ]; then
+              echo "Repository is stale"
+              echo "::set-output name=stale::true"
+          fi
+          for repo in openslide openslide-java openslide-winbuild; do
+              old=$(jq -r ".builds[-1][\"${repo}\"]" docs/windows/index.json)
+              new=$(curl --no-progress-meter \
+                  -H "Accept: application/vnd.github.v3+json" \
+                  -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                  "https://api.github.com/repos/openslide/${repo}/commits/main" |
+                  jq -r .sha)
+              echo "$repo commit: https://github.com/openslide/${repo}/commit/$new"
+              echo "::set-output name=${repo##*-}_commit::$new"
+              if [ "$old" != "$new" ]; then
+                  echo "    -> changed from https://github.com/openslide/${repo}/commit/$old"
+                  echo "::set-output name=changed::true"
+              else
+                  echo "    -> unchanged"
+              fi
+          done
+
+  build:
+    name: Build
+    needs: setup
+    if: needs.setup.outputs.changed
+    uses: openslide/openslide-winbuild/.github/workflows/windows.yml@main
+    with:
+      openslide_repo: openslide/openslide
+      openslide_ref: ${{ needs.setup.outputs.openslide_commit }}
+      openslide_java_repo: openslide/openslide-java
+      openslide_java_ref: ${{ needs.setup.outputs.java_commit }}
+      openslide_winbuild_repo: openslide/openslide-winbuild
+      openslide_winbuild_ref: ${{ needs.setup.outputs.winbuild_commit }}
+      pkgver: ${{ needs.setup.outputs.pkgver }}
+
+  upload:
+    name: Upload
+    needs: [setup, build]
+    if: needs.setup.outputs.changed
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: sudo apt-get install python3-dateutil python3-jinja2
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ needs.build.outputs.artifact }}
+      - name: Update index
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          scripts/winbuild-index.py \
+              --pkgver "${{ needs.setup.outputs.pkgver }}" \
+              --openslide "${{ needs.setup.outputs.openslide_commit }}" \
+              --java "${{ needs.setup.outputs.java_commit }}" \
+              --winbuild "${{ needs.setup.outputs.winbuild_commit }}"
+      - name: Commit, tag, push
+        run: |
+          pkgver="${{ needs.setup.outputs.pkgver }}"
+          title="Windows build $pkgver"
+          body="OpenSlide:          openslide/openslide@$(echo ${{ needs.setup.outputs.openslide_commit }} | cut -c-8)
+          OpenSlide Java:     openslide/openslide-java@$(echo ${{ needs.setup.outputs.java_commit }} | cut -c-8)
+          openslide-winbuild: openslide/openslide-winbuild@$(echo ${{ needs.setup.outputs.winbuild_commit }} | cut -c-8)"
+
+          git add docs
+          git commit -m "$title" -m "$body"
+          git tag -a "windows-$pkgver" -m "$title" -m "$body"
+          git push origin HEAD "windows-$pkgver"
+
+          cat > notes.md <<EOF
+          $body
+
+          See the [build index](https://openslide.org/builds/windows/) for more info.
+          EOF
+      - name: Create release
+        uses: softprops/action-gh-release@v0.1.14
+        with:
+          name: Windows build ${{ needs.setup.outputs.pkgver }}
+          tag_name: windows-${{ needs.setup.outputs.pkgver }}
+          body_path: notes.md
+          prerelease: true
+          files: "${{ needs.build.outputs.artifact }}/*"
+          fail_on_unmatched_files: true
+
+  keepalive:
+    name: Keepalive
+    needs: setup
+    if: needs.setup.outputs.stale && ! needs.setup.outputs.changed
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v3
+      - name: Install dependencies
+        run: sudo apt-get install python3-dateutil python3-jinja2
+      - name: Commit and push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          scripts/winbuild-index.py
+          git add docs
+          git commit -m "Update timestamp"
+          git push
