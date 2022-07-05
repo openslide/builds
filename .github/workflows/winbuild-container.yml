@@ -5,7 +5,6 @@ name: winbuild container
 on:
   schedule:
     - cron: "40 14 * * 3"
-  workflow_dispatch:
 
 permissions:
   contents: read
