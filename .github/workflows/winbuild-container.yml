@@ -1,0 +1,19 @@
+# Periodically refresh winbuild-builder container
+
+name: winbuild container
+
+on:
+  schedule:
+    - cron: "40 14 * * 3"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency: winbuild-container
+
+jobs:
+  container:
+    name: winbuild-builder
+    uses: openslide/openslide-winbuild/.github/workflows/container.yml@main
