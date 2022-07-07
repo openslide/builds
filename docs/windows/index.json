@@ -1,4 +1,12 @@
 {
-  "builds": [],
-  "last_update": 1657085662
+  "builds": [
+    {
+      "date": "2022-07-07",
+      "openslide": "e8fe399c4080cc87cfa9443b20df8ff35707a0c7",
+      "openslide-java": "4bd8add99b6b78b043c0fe1b04c34626718e2cd9",
+      "openslide-winbuild": "8539155909ffe7be50bb46bcb81e0811375b036a",
+      "pkgver": "20220707-nightly"
+    }
+  ],
+  "last_update": 1657162630
 }
