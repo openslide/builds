@@ -76,7 +76,14 @@
       "openslide-java": "4bd8add99b6b78b043c0fe1b04c34626718e2cd9",
       "openslide-winbuild": "a7b7a690861e46735d92c5f3e7182a6c5a61cbc2",
       "pkgver": "20220808-nightly"
+    },
+    {
+      "date": "2022-08-12",
+      "openslide": "8986d9fb24419d54c0132e6cbf2ae69a57947a63",
+      "openslide-java": "4bd8add99b6b78b043c0fe1b04c34626718e2cd9",
+      "openslide-winbuild": "fa83c2d0dbdb9896dbc0ced520cbb4bb942ec788",
+      "pkgver": "20220812-nightly"
     }
   ],
-  "last_update": 1659926992
+  "last_update": 1660272475
 }
