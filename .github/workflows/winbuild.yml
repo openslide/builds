@@ -36,7 +36,7 @@ jobs:
         run: |
           set -euo pipefail
           pkgver="$(date +%Y%m%d)-nightly"
-          echo "::set-output name=pkgver::$pkgver"
+          echo "pkgver=$pkgver" >> $GITHUB_OUTPUT
           duplicate=$(jq ".builds[] | select(.pkgver == \"$pkgver\")" \
               docs/windows/index.json)
           if [ -n "$duplicate" ]; then
@@ -47,7 +47,7 @@ jobs:
           # disable the workflow
           if [ $(( $(jq .last_update docs/windows/index.json) + 86400 * 30 )) -lt $(date +%s) ]; then
               echo "Repository is stale"
-              echo "::set-output name=stale::true"
+              echo "stale=true" >> $GITHUB_OUTPUT
           fi
           for repo in openslide openslide-java openslide-winbuild; do
               old=$(jq -r ".builds[-1][\"${repo}\"]" docs/windows/index.json)
@@ -57,10 +57,10 @@ jobs:
                   "https://api.github.com/repos/openslide/${repo}/commits/main" |
                   jq -r .sha)
               echo "$repo commit: https://github.com/openslide/${repo}/commit/$new"
-              echo "::set-output name=${repo##*-}_commit::$new"
+              echo "${repo##*-}_commit=$new" >> $GITHUB_OUTPUT
               if [ "$old" != "$new" ]; then
                   echo "    -> changed from https://github.com/openslide/${repo}/commit/$old"
-                  echo "::set-output name=changed::true"
+                  echo "changed=true" >> $GITHUB_OUTPUT
               else
                   echo "    -> unchanged"
               fi
