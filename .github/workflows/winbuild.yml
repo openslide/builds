@@ -103,7 +103,9 @@ jobs:
               --openslide "${{ needs.setup.outputs.openslide_commit }}" \
               --java "${{ needs.setup.outputs.java_commit }}" \
               --winbuild "${{ needs.setup.outputs.winbuild_commit }}"
-      - name: Commit, tag, push
+      - name: Commit, tag, push, create release
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           pkgver="${{ needs.setup.outputs.pkgver }}"
           title="Windows build $pkgver"
@@ -116,20 +118,13 @@ jobs:
           git tag -a "windows-$pkgver" -m "$title" -m "$body"
           git push origin HEAD "windows-$pkgver"
 
-          cat > notes.md <<EOF
+          gh release create --notes-file - --prerelease --verify-tag \
+              --title "Windows build $pkgver" "windows-$pkgver" \
+              "${{ needs.build.outputs.artifact }}/"* <<EOF
           $body
 
           See the [build index](https://openslide.org/builds/windows/) for more info.
           EOF
-      - name: Create release
-        uses: softprops/action-gh-release@v0.1.14
-        with:
-          name: Windows build ${{ needs.setup.outputs.pkgver }}
-          tag_name: windows-${{ needs.setup.outputs.pkgver }}
-          body_path: notes.md
-          prerelease: true
-          files: "${{ needs.build.outputs.artifact }}/*"
-          fail_on_unmatched_files: true
 
   keepalive:
     name: Keepalive
