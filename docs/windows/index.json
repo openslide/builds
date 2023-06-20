@@ -1,13 +1,6 @@
 {
   "builds": [
     {
-      "date": "2023-01-10",
-      "openslide": "0f632f27e9748e976ec7ced2ab15d60b0986a527",
-      "openslide-java": "4a563dcc0f32530d1fc38e61ae1b20a96658b74c",
-      "openslide-winbuild": "beb26f8d3b501a6f5a5ffac65c57868887e804bf",
-      "pkgver": "20230110-nightly"
-    },
-    {
       "date": "2023-01-11",
       "openslide": "001a70ab1f228746e0be92113860f3b34e9d6cb2",
       "openslide-java": "4a563dcc0f32530d1fc38e61ae1b20a96658b74c",
@@ -209,7 +202,14 @@
       "openslide-java": "743758a7ff043a8c075834c1b8d240969d025448",
       "openslide-winbuild": "f28729fac37687f5e10e040100c50aae7985102f",
       "pkgver": "20230614-nightly"
+    },
+    {
+      "date": "2023-06-20",
+      "openslide": "0d41ab7f6a085e7626c4922519c324a2c25c41f9",
+      "openslide-java": "743758a7ff043a8c075834c1b8d240969d025448",
+      "openslide-winbuild": "a55d8995eb0c598526f03a7c988557f47e1e2884",
+      "pkgver": "20230620-nightly"
     }
   ],
-  "last_update": 1686708339
+  "last_update": 1687226393
 }
