@@ -22,6 +22,7 @@ jobs:
     name: Set up
     runs-on: ubuntu-latest
     outputs:
+      builder_repo_and_digest: ${{ steps.find.outputs.builder_repo_and_digest }}
       pkgver: ${{ steps.params.outputs.pkgver }}
       openslide_commit: ${{ steps.params.outputs.openslide_commit }}
       java_commit: ${{ steps.params.outputs.java_commit }}
@@ -31,6 +32,9 @@ jobs:
     steps:
       - name: Check out repo
         uses: actions/checkout@v3
+      - name: Find builder container digest
+        id: find
+        uses: openslide/openslide-winbuild/.github/find-container-digest@main
       - name: Calculate parameters
         id: params
         run: |
@@ -72,6 +76,7 @@ jobs:
     if: needs.setup.outputs.changed
     uses: openslide/openslide-winbuild/.github/workflows/windows.yml@main
     with:
+      builder_repo_and_digest: ${{ needs.setup.outputs.builder_repo_and_digest }}
       openslide_repo: openslide/openslide
       openslide_ref: ${{ needs.setup.outputs.openslide_commit }}
       openslide_java_repo: openslide/openslide-java
