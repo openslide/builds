@@ -4,7 +4,7 @@ name: winbuild container
 
 on:
   schedule:
-    - cron: "40 14 * * 3"
+    - cron: "40 14 1 * *"
 
 permissions:
   contents: read
