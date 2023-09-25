@@ -61,10 +61,10 @@ jobs:
                   -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
                   "https://api.github.com/repos/openslide/${repo}/commits/main" |
                   jq -r .sha)
-              echo "$repo commit: https://github.com/openslide/${repo}/commit/$new"
+              echo "$repo commit: https://github.com/openslide/${repo}/commit/${new:0:10}"
               echo "${repo##*-}_commit=$new" >> $GITHUB_OUTPUT
               if [ "$old" != "$new" ]; then
-                  echo "    -> changed from https://github.com/openslide/${repo}/commit/$old"
+                  echo "    -> changed from https://github.com/openslide/${repo}/commit/${old:0:10}"
                   echo "changed=true" >> $GITHUB_OUTPUT
               else
                   echo "    -> unchanged"
