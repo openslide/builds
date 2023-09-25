@@ -123,12 +123,35 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
+          artifact="${{ needs.build.outputs.artifact }}"
           pkgver="${{ needs.setup.outputs.pkgver }}"
-          title="Windows build $pkgver"
-          body="OpenSlide:          openslide/openslide@$(echo ${{ needs.setup.outputs.openslide_commit }} | cut -c-8)
-          OpenSlide Java:     openslide/openslide-java@$(echo ${{ needs.setup.outputs.java_commit }} | cut -c-8)
-          openslide-winbuild: openslide/openslide-winbuild@$(echo ${{ needs.setup.outputs.winbuild_commit }} | cut -c-8)"
 
+          unzip -j "${artifact}/openslide-win32-${pkgver}.zip" \
+              "openslide-win32-${pkgver}/VERSIONS.md"
+          # trim width for commit message limit
+          sed -i -e 's/      |$/|/' VERSIONS.md
+          pkglen=$(awk -F'|' '{print length($2) - 2; exit}' VERSIONS.md)
+          verlen=$(awk -F'|' '{print length($3) - 2; exit}' VERSIONS.md)
+          line() {
+              # args: friendly-name repo-name commit-hash emphasis
+              printf "| %-${pkglen}s | %-${verlen}s |" \
+                  "$4$1$4" "${4}openslide/${2}@${3:0:8}${4}"
+          }
+          update_line() {
+              # args: friendly-name repo-name commit-hash emphasis
+              local new="$(line "$@")"
+              local escaped="$(sed 's/*/\\*/g' <<<"$4$1$4")"
+              sed -i -e "/$escaped/ s^.*^$new^" VERSIONS.md
+          }
+          update_line OpenSlide openslide \
+              "${{ needs.setup.outputs.openslide_commit }}" "**"
+          update_line "OpenSlide Java" openslide-java \
+              "${{ needs.setup.outputs.java_commit }}" "**"
+          line openslide-winbuild openslide-winbuild \
+              "${{ needs.setup.outputs.winbuild_commit }}" _ >> VERSIONS.md
+
+          title="Windows build $pkgver"
+          body="$(cat VERSIONS.md)"
           git add docs
           git commit -m "$title" -m "$body"
           git tag -a "windows-$pkgver" -m "$title" -m "$body"
@@ -136,10 +159,10 @@ jobs:
 
           gh release create --notes-file - --prerelease --verify-tag \
               --title "Windows build $pkgver" "windows-$pkgver" \
-              "${{ needs.build.outputs.artifact }}/"* <<EOF
-          $body
-
+              "${artifact}/"* <<EOF
           See the [build index](https://openslide.org/builds/windows/) for more info.
+
+          $body
           EOF
 
   keepalive:
