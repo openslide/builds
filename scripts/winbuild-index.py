@@ -2,7 +2,7 @@
 #
 # Generate directory index for Windows snapshot builds
 #
-# Copyright (c) 2014, 2022 Benjamin Gilbert
+# Copyright (c) 2014, 2022-2023 Benjamin Gilbert
 #
 # This library is free software; you can redistribute it and/or modify it
 # under the terms of version 2.1 of the GNU Lesser General Public License
@@ -29,6 +29,7 @@ import requests
 import sys
 
 REPO = 'openslide/builds'
+CONTAINER = 'openslide/winbuild-builder'
 HTML = 'windows/index.html'
 JSON = 'windows/index.json'
 RETAIN = 30
@@ -89,6 +90,7 @@ Builds are skipped if nothing has changed.
     <th class="repo">openslide</th>
     <th class="repo">openslide-java</th>
     <th class="repo">openslide-winbuild</th>
+    <th class="repo">builder</th>
     <th></th>
     <th colspan="3">Downloads</th>
   </tr>
@@ -103,6 +105,16 @@ Builds are skipped if nothing has changed.
       </td>
       <td class="revision">
         {{ revision_link('openslide-winbuild', row.winbuild_prev, row.winbuild_cur) }}
+      </td>
+      <td class="revision">
+        {% set builder_short = row.builder.split('@')[1].split(':')[1][:8] %}
+        {% if row.builder in container_images %}
+          <a href="{{ container_images[row.builder] }}">
+            {{ builder_short }}
+          </a>
+        {% else %}
+          {{ builder_short }}
+        {% endif %}
       </td>
       <td class="spacer"></td>
       <td class="win32">
@@ -133,6 +145,8 @@ def main():
             help='Website directory')
     parser.add_argument('--pkgver', metavar='VER',
             help='package version')
+    parser.add_argument('--builder', metavar='REF',
+            help='builder container reference')
     parser.add_argument('--openslide', metavar='COMMIT',
             help='commit ID for OpenSlide')
     parser.add_argument('--java', metavar='COMMIT',
@@ -153,12 +167,13 @@ def main():
 
     # Build new record
     if args.pkgver:
-        if not args.openslide or not args.java or not args.winbuild:
+        if not args.builder or not args.openslide or not args.java or not args.winbuild:
             parser.error('New build must be completely specified')
         records.append({
             'pkgver': args.pkgver,
             'date': dateutil.parser.parse(args.pkgver.split('-')[0]).
                     date().isoformat(),
+            'builder': args.builder,
             'openslide': args.openslide,
             'openslide-java': args.java,
             'openslide-winbuild': args.winbuild,
@@ -186,6 +201,18 @@ def main():
         ).raise_for_status()
     records = records[-RETAIN:]
 
+    # Get builder container image URLs
+    container_org, container_name = CONTAINER.split('/')
+    resp = requests.get(
+        f'https://api.github.com/orgs/{container_org}/packages/container/{container_name}/versions?per_page=100',
+        headers=headers
+    )
+    resp.raise_for_status()
+    container_images = {}
+    for image in resp.json():
+        ref = f'ghcr.io/{container_org}/{container_name}@{image["name"]}'
+        container_images[ref] = image['html_url']
+
     # Generate rows for HTML template
     rows = []
     prev_record = None
@@ -198,6 +225,7 @@ def main():
         rows.append({
             'date': record['date'],
             'pkgver': record['pkgver'],
+            'builder': record['builder'],
             'openslide_prev': prev('openslide'),
             'openslide_cur': record['openslide'],
             'java_prev': prev('openslide-java'),
@@ -210,6 +238,7 @@ def main():
     # Write HTML
     with open(args.dir / HTML, 'w') as fh:
         template.stream({
+            'container_images': container_images,
             'retain': RETAIN,
             'rows': reversed(rows),
         }).dump(fh)

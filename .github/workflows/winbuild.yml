@@ -8,6 +8,7 @@ on:
 
 permissions:
   contents: write
+  packages: read
 
 concurrency: winbuild
 
@@ -105,6 +106,7 @@ jobs:
         run: |
           scripts/winbuild-index.py \
               --pkgver "${{ needs.setup.outputs.pkgver }}" \
+              --builder "${{ needs.setup.outputs.builder_repo_and_digest }}" \
               --openslide "${{ needs.setup.outputs.openslide_commit }}" \
               --java "${{ needs.setup.outputs.java_commit }}" \
               --winbuild "${{ needs.setup.outputs.winbuild_commit }}"
