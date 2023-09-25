@@ -70,6 +70,15 @@ jobs:
                   echo "    -> unchanged"
               fi
           done
+          old=$(jq -r '.builds[-1]["builder"]' docs/windows/index.json)
+          new="${{ steps.find.outputs.builder_repo_and_digest }}"
+          echo "Builder container: $new"
+          if [ "$old" != "$new" ]; then
+              echo "    -> changed from $old"
+              echo "changed=true" >> $GITHUB_OUTPUT
+          else
+              echo "    -> unchanged"
+          fi
 
   build:
     name: Build
