@@ -32,7 +32,7 @@ jobs:
       stale: ${{ steps.params.outputs.stale }}
     steps:
       - name: Check out repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Find builder container digest
         id: find
         uses: openslide/openslide-winbuild/.github/find-container-digest@main
@@ -102,7 +102,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install dependencies
         run: sudo apt-get install python3-dateutil python3-jinja2
       - name: Download artifacts
@@ -172,7 +172,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install dependencies
         run: sudo apt-get install python3-dateutil python3-jinja2
       - name: Commit and push
