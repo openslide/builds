@@ -84,6 +84,17 @@ Builds are skipped if nothing has changed.
   {% endif %}
 {% endmacro %}
 
+{% macro builder_link(builder) %}
+  {% set builder_short = builder.split('@')[1].split(':')[1][:8] %}
+  {% if builder in container_images %}
+    <a href="{{ container_images[builder] }}">
+      {{ builder_short }}
+    </a>
+  {% else %}
+    {{ builder_short }}
+  {% endif %}
+{% endmacro %}
+
 <table>
   <tr>
     <th>Date</th>
@@ -107,14 +118,7 @@ Builds are skipped if nothing has changed.
         {{ revision_link('openslide-winbuild', row.winbuild_prev, row.winbuild_cur) }}
       </td>
       <td class="revision">
-        {% set builder_short = row.builder.split('@')[1].split(':')[1][:8] %}
-        {% if row.builder in container_images %}
-          <a href="{{ container_images[row.builder] }}">
-            {{ builder_short }}
-          </a>
-        {% else %}
-          {{ builder_short }}
-        {% endif %}
+        {{ builder_link(row.windows_builder) }}
       </td>
       <td class="spacer"></td>
       <td class="source">
@@ -145,8 +149,10 @@ def main():
             help='Website directory')
     parser.add_argument('--pkgver', metavar='VER',
             help='package version')
-    parser.add_argument('--builder', metavar='REF',
-            help='builder container reference')
+    parser.add_argument('--linux-builder', metavar='REF',
+            help='Linux builder container reference')
+    parser.add_argument('--windows-builder', metavar='REF',
+            help='Windows builder container reference')
     parser.add_argument('--openslide', metavar='COMMIT',
             help='commit ID for OpenSlide')
     parser.add_argument('--java', metavar='COMMIT',
@@ -167,13 +173,17 @@ def main():
 
     # Build new record
     if args.pkgver:
-        if not args.builder or not args.openslide or not args.java or not args.winbuild:
+        if (
+            not args.linux_builder or not args.windows_builder or
+            not args.openslide or not args.java or not args.winbuild
+        ):
             parser.error('New build must be completely specified')
         records.append({
             'pkgver': args.pkgver,
             'date': dateutil.parser.parse(args.pkgver.split('-')[0]).
                     date().isoformat(),
-            'builder': args.builder,
+            'linux-builder': args.linux_builder,
+            'windows-builder': args.windows_builder,
             'openslide': args.openslide,
             'openslide-java': args.java,
             'openslide-winbuild': args.winbuild,
@@ -226,7 +236,8 @@ def main():
         rows.append({
             'date': record['date'],
             'pkgver': record['pkgver'],
-            'builder': record['builder'],
+            'linux_builder': record['linux-builder'],
+            'windows_builder': record['windows-builder'],
             'openslide_prev': prev('openslide'),
             'openslide_cur': record['openslide'],
             'java_prev': prev('openslide-java'),
