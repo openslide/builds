@@ -56,7 +56,7 @@ template = Template('''<!doctype html>
   td.spacer {
     padding-right: 25px;
   }
-  td.winbuild {
+  td.win64 {
     padding-right: 5px;
   }
   tr {
@@ -117,6 +117,11 @@ Builds are skipped if nothing has changed.
         {% endif %}
       </td>
       <td class="spacer"></td>
+      <td class="source">
+        <a href="https://github.com/openslide/builds/releases/download/windows-{{ row.pkgver }}/openslide-winbuild-{{ row.pkgver }}.zip">
+          Source
+        </a>
+      </td>
       <td class="win32">
         <a href="https://github.com/openslide/builds/releases/download/windows-{{ row.pkgver }}/openslide-win32-{{ row.pkgver }}.zip">
           32-bit
@@ -125,11 +130,6 @@ Builds are skipped if nothing has changed.
       <td class="win64">
         <a href="https://github.com/openslide/builds/releases/download/windows-{{ row.pkgver }}/openslide-win64-{{ row.pkgver }}.zip">
           64-bit
-        </a>
-      </td>
-      <td class="winbuild">
-        <a href="https://github.com/openslide/builds/releases/download/windows-{{ row.pkgver }}/openslide-winbuild-{{ row.pkgver }}.zip">
-          Corresponding sources
         </a>
       </td>
     </tr>
