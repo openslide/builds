@@ -12,13 +12,13 @@ GitHub embeds this repo's Pages site into the main OpenSlide website at
 [openslide.org/builds](https://openslide.org/builds/), so the name of this
 repository directly affects the layout of the OpenSlide site.
 
-The Windows builds are run inside a [builder container][container], which
-is periodically [rebuilt][workflow-container] by the
+The Windows builds are run inside a [builder container][container-windows],
+which is periodically [rebuilt][workflow-container-windows] by the
 [openslide-winbuild][openslide-winbuild] repo.
 
 [builds]: https://openslide.org/builds/
-[container]: https://github.com/openslide/openslide-winbuild/pkgs/container/winbuild-builder
+[container-windows]: https://github.com/openslide/openslide-winbuild/pkgs/container/winbuild-builder
 [openslide-winbuild]: https://github.com/openslide/openslide-winbuild
 [releases]: https://github.com/openslide/builds/releases/
 [workflow]: https://github.com/openslide/builds/actions/workflows/winbuild.yml
-[workflow-container]: https://github.com/openslide/openslide-winbuild/actions/workflows/container.yml
+[workflow-container-windows]: https://github.com/openslide/openslide-winbuild/actions/workflows/container-windows.yml
