@@ -29,7 +29,7 @@ import requests
 import sys
 
 REPO = 'openslide/builds'
-CONTAINER = 'openslide/winbuild-builder'
+CONTAINERS = ('openslide/linux-builder', 'openslide/winbuild-builder')
 HTML = 'windows/index.html'
 JSON = 'windows/index.json'
 RETAIN = 30
@@ -202,16 +202,17 @@ def main():
     records = records[-RETAIN:]
 
     # Get builder container image URLs
-    container_org, container_name = CONTAINER.split('/')
-    resp = requests.get(
-        f'https://api.github.com/orgs/{container_org}/packages/container/{container_name}/versions?per_page=100',
-        headers=headers
-    )
-    resp.raise_for_status()
     container_images = {}
-    for image in resp.json():
-        ref = f'ghcr.io/{container_org}/{container_name}@{image["name"]}'
-        container_images[ref] = image['html_url']
+    for container in CONTAINERS:
+        container_org, container_name = container.split('/')
+        resp = requests.get(
+            f'https://api.github.com/orgs/{container_org}/packages/container/{container_name}/versions?per_page=100',
+            headers=headers
+        )
+        resp.raise_for_status()
+        for image in resp.json():
+            ref = f'ghcr.io/{container_org}/{container_name}@{image["name"]}'
+            container_images[ref] = image['html_url']
 
     # Generate rows for HTML template
     rows = []
