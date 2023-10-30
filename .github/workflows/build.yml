@@ -1,6 +1,6 @@
-# Nightly Windows builds
+# Nightly builds
 
-name: winbuild
+name: Build
 
 on:
   schedule:
@@ -10,7 +10,7 @@ permissions:
   contents: write
   packages: read
 
-concurrency: winbuild
+concurrency: build
 
 env:
   GIT_AUTHOR_NAME: OpenSlide Automation

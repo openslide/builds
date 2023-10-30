@@ -20,5 +20,5 @@ which is periodically [rebuilt][workflow-container-windows] by the
 [container-windows]: https://github.com/openslide/openslide-winbuild/pkgs/container/winbuild-builder
 [openslide-winbuild]: https://github.com/openslide/openslide-winbuild
 [releases]: https://github.com/openslide/builds/releases/
-[workflow]: https://github.com/openslide/builds/actions/workflows/winbuild.yml
+[workflow]: https://github.com/openslide/builds/actions/workflows/build.yml
 [workflow-container-windows]: https://github.com/openslide/openslide-winbuild/actions/workflows/container-windows.yml
