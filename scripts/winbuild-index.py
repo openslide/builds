@@ -30,8 +30,8 @@ import sys
 
 REPO = 'openslide/builds'
 CONTAINERS = ('openslide/linux-builder', 'openslide/winbuild-builder')
-HTML = 'windows/index.html'
-JSON = 'windows/index.json'
+HTML = 'index.html'
+JSON = 'index.json'
 RETAIN = 30
 
 template = Template('''<!doctype html>

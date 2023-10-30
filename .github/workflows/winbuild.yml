@@ -45,19 +45,19 @@ jobs:
           pkgver="$(date +%Y%m%d)-nightly"
           echo "pkgver=$pkgver" >> $GITHUB_OUTPUT
           duplicate=$(jq ".builds[] | select(.pkgver == \"$pkgver\")" \
-              docs/windows/index.json)
+              docs/index.json)
           if [ -n "$duplicate" ]; then
               echo "Found existing nightly build $pkgver"
               exit 1
           fi
           # Modify the repository at least every 30 days so GitHub doesn't
           # disable the workflow
-          if [ $(( $(jq .last_update docs/windows/index.json) + 86400 * 30 )) -lt $(date +%s) ]; then
+          if [ $(( $(jq .last_update docs/index.json) + 86400 * 30 )) -lt $(date +%s) ]; then
               echo "Repository is stale"
               echo "stale=true" >> $GITHUB_OUTPUT
           fi
           for repo in openslide openslide-java openslide-winbuild; do
-              old=$(jq -r ".builds[-1][\"${repo}\"]" docs/windows/index.json)
+              old=$(jq -r ".builds[-1][\"${repo}\"]" docs/index.json)
               new=$(curl --no-progress-meter \
                   -H "Accept: application/vnd.github.v3+json" \
                   -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
@@ -72,7 +72,7 @@ jobs:
                   echo "    -> unchanged"
               fi
           done
-          old=$(jq -r '.builds[-1]["builder"]' docs/windows/index.json)
+          old=$(jq -r '.builds[-1]["builder"]' docs/index.json)
           new="${{ steps.find.outputs.builder_repo_and_digest }}"
           echo "Builder container: $new"
           if [ "$old" != "$new" ]; then
@@ -162,7 +162,7 @@ jobs:
           gh release create --notes-file - --prerelease --verify-tag \
               --title "Windows build $pkgver" "windows-$pkgver" \
               "${artifact}/"* <<EOF
-          See the [build index](https://openslide.org/builds/windows/) for more info.
+          See the [build index](https://openslide.org/builds/) for more info.
 
           $body
           EOF

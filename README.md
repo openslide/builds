@@ -16,7 +16,7 @@ The Windows builds are run inside a [builder container][container], which
 is periodically [rebuilt][workflow-container] by the
 [openslide-winbuild][openslide-winbuild] repo.
 
-[builds]: https://openslide.org/builds/windows/
+[builds]: https://openslide.org/builds/
 [container]: https://github.com/openslide/openslide-winbuild/pkgs/container/winbuild-builder
 [openslide-winbuild]: https://github.com/openslide/openslide-winbuild
 [releases]: https://github.com/openslide/builds/releases/
