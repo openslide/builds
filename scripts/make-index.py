@@ -101,6 +101,7 @@ Builds are skipped if nothing has changed.
     <th class="repo">openslide</th>
     <th class="repo">openslide-java</th>
     <th class="repo">openslide-winbuild</th>
+    <th class="repo">linux-builder</th>
     <th class="repo">winbuild-builder</th>
     <th></th>
     <th colspan="3">Downloads</th>
@@ -116,6 +117,9 @@ Builds are skipped if nothing has changed.
       </td>
       <td class="revision">
         {{ revision_link('openslide-winbuild', row.winbuild_prev, row.winbuild_cur) }}
+      </td>
+      <td class="revision">
+        {{ builder_link(row.linux_builder) }}
       </td>
       <td class="revision">
         {{ builder_link(row.windows_builder) }}
