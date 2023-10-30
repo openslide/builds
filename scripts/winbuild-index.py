@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 #
-# Generate directory index for Windows snapshot builds
+# Generate directory index for snapshot builds
 #
 # Copyright (c) 2014, 2022-2023 Benjamin Gilbert
 #
@@ -67,8 +67,8 @@ template = Template('''<!doctype html>
   }
 </style>
 
-<title>OpenSlide Windows development builds</title>
-<h1>OpenSlide Windows development builds</h1>
+<title>OpenSlide development builds</title>
+<h1>OpenSlide development builds</h1>
 
 <p>Here are the {{ retain }} newest successful nightly builds.
 Older builds are automatically deleted.
@@ -124,12 +124,12 @@ Builds are skipped if nothing has changed.
       </td>
       <td class="win32">
         <a href="https://github.com/openslide/builds/releases/download/windows-{{ row.pkgver }}/openslide-win32-{{ row.pkgver }}.zip">
-          32-bit
+          Windows 32-bit
         </a>
       </td>
       <td class="win64">
         <a href="https://github.com/openslide/builds/releases/download/windows-{{ row.pkgver }}/openslide-win64-{{ row.pkgver }}.zip">
-          64-bit
+          Windows 64-bit
         </a>
       </td>
     </tr>
