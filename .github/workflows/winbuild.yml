@@ -115,7 +115,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          scripts/winbuild-index.py \
+          scripts/make-index.py \
               --pkgver "${{ needs.setup.outputs.pkgver }}" \
               --builder "${{ needs.setup.outputs.builder_repo_and_digest }}" \
               --openslide "${{ needs.setup.outputs.openslide_commit }}" \
@@ -181,7 +181,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          scripts/winbuild-index.py
+          scripts/make-index.py
           git add docs
           git commit -m "Update timestamp"
           git push
