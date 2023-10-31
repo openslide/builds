@@ -3,9 +3,9 @@
     {
       "date": "2023-09-01",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "743eabc08b70a8f860a0ea530e54e81f74f03826",
@@ -18,9 +18,9 @@
     {
       "date": "2023-09-04",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "239d7bd9f603be159e6558464f311b5b243d12b1",
@@ -33,9 +33,9 @@
     {
       "date": "2023-09-08",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "cba7702258f777bd122432642f50d50aea0ef374",
@@ -48,9 +48,9 @@
     {
       "date": "2023-09-15",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "cba7702258f777bd122432642f50d50aea0ef374",
@@ -63,9 +63,9 @@
     {
       "date": "2023-09-22",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "cba7702258f777bd122432642f50d50aea0ef374",
@@ -78,9 +78,9 @@
     {
       "date": "2023-09-23",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "cba7702258f777bd122432642f50d50aea0ef374",
@@ -93,9 +93,9 @@
     {
       "date": "2023-09-24",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "cba7702258f777bd122432642f50d50aea0ef374",
@@ -108,9 +108,9 @@
     {
       "date": "2023-09-26",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "cc69967cec3a3412806b8526ab5bf3d3c62f8154",
@@ -123,9 +123,9 @@
     {
       "date": "2023-09-28",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "84ec5727be9347871cd041fa406009430e92f6ff",
@@ -138,9 +138,9 @@
     {
       "date": "2023-09-29",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "bbad585cf1d520367d4554dccf8169cf227c0fde",
@@ -153,9 +153,9 @@
     {
       "date": "2023-09-30",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "6266c7f0f11b441e5bb68d00315128570af19b6a",
@@ -168,9 +168,9 @@
     {
       "date": "2023-10-01",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "6266c7f0f11b441e5bb68d00315128570af19b6a",
@@ -183,9 +183,9 @@
     {
       "date": "2023-10-02",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "642b057b1e15f7c83eadd651c092724e993e8700",
@@ -198,9 +198,9 @@
     {
       "date": "2023-10-03",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "642b057b1e15f7c83eadd651c092724e993e8700",
@@ -213,9 +213,9 @@
     {
       "date": "2023-10-04",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "a352fb7d4c5cf2b654e206bd040917699d3ec2b4",
@@ -228,9 +228,9 @@
     {
       "date": "2023-10-05",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "e6f39c8ddcf1ef3f775bebdd49615950600c7c20",
@@ -243,9 +243,9 @@
     {
       "date": "2023-10-06",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "0c1fce5adb129e413ca077d3bac3edfb81f1ffcd",
@@ -258,9 +258,9 @@
     {
       "date": "2023-10-07",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "5cc8cb631593356d4c630e935c94efdbc7fce16d",
@@ -273,9 +273,9 @@
     {
       "date": "2023-10-09",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "7cd03842495518adc857dfe7ee743d60aa3a61f5",
@@ -288,9 +288,9 @@
     {
       "date": "2023-10-10",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "ed54229c3dd588acc1ce29266ec1ec1ab29afefc",
@@ -303,9 +303,9 @@
     {
       "date": "2023-10-11",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "f69b2d3a0e7c0fe51ec866aae85913c0e583e073",
@@ -318,9 +318,9 @@
     {
       "date": "2023-10-12",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "615670d924d6dddce3d407d1a6440a32cf5350c7",
@@ -333,9 +333,9 @@
     {
       "date": "2023-10-16",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "d83e06df6ea3044d73798d4c7335c6b6b9a2b50b",
@@ -348,9 +348,9 @@
     {
       "date": "2023-10-17",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "d83e06df6ea3044d73798d4c7335c6b6b9a2b50b",
@@ -363,9 +363,9 @@
     {
       "date": "2023-10-21",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "b6dc5de5a78fa34867000732997e8932cdd45e5a",
@@ -378,9 +378,9 @@
     {
       "date": "2023-10-24",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "b6dc5de5a78fa34867000732997e8932cdd45e5a",
@@ -393,9 +393,9 @@
     {
       "date": "2023-10-27",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "3acc3ed4c1b09de9eb91a5bd5cd593270fcda5eb",
@@ -408,9 +408,9 @@
     {
       "date": "2023-10-29",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "ff14e2bcdc42605d727488c5a3275c3309afc636",
@@ -423,9 +423,9 @@
     {
       "date": "2023-10-30",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": null,
       "openslide": "ff14e2bcdc42605d727488c5a3275c3309afc636",
@@ -438,9 +438,9 @@
     {
       "date": "2023-10-31",
       "files": [
-        "winbuild",
         "win32",
-        "win64"
+        "win64",
+        "winbuild"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:d6204d7e6185bb21715d63ef9baf6444d3bd825dfc0662638b23c723b67cc84c",
       "openslide": "1364dc2874f24fc23b71773b9e330e68f153cfa9",

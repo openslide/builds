@@ -195,17 +195,16 @@ def main():
             not args.tag or not args.files
         ):
             parser.error('New build must be completely specified')
-        files = [
-            path.name.split(f'-{args.pkgver}')[0].
-                removeprefix('openslide-').removeprefix('bin-')
-            for path in args.files.iterdir()
-        ]
         records.append({
             'pkgver': args.pkgver,
             'date': dateutil.parser.parse(args.pkgver.split('-')[0]).
                     date().isoformat(),
             'tag': args.tag,
-            'files': files,
+            'files': sorted(
+                path.name.split(f'-{args.pkgver}')[0].
+                    removeprefix('openslide-').removeprefix('bin-')
+                for path in args.files.iterdir()
+            ),
             'linux-builder': args.linux_builder,
             'windows-builder': args.windows_builder,
             'openslide': args.openslide,
