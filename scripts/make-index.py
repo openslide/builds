@@ -126,21 +126,25 @@ Builds are skipped if nothing has changed.
       </td>
       <td class="spacer"></td>
       <td class="source">
-        <a href="https://github.com/openslide/builds/releases/download/windows-{{ row.pkgver }}/openslide-winbuild-{{ row.pkgver }}.zip">
-          Source
-        </a>
+        {% if 'winbuild' in row.files %}
+          <a href="https://github.com/openslide/builds/releases/download/windows-{{ row.pkgver }}/openslide-winbuild-{{ row.pkgver }}.zip">
+            Source
+          </a>
+        {% endif %}
       </td>
       <td class="win32">
-        {% if row.win32 %}
+        {% if 'win32' in row.files %}
           <a href="https://github.com/openslide/builds/releases/download/windows-{{ row.pkgver }}/openslide-win32-{{ row.pkgver }}.zip">
             Windows 32-bit
           </a>
         {% endif %}
       </td>
       <td class="win64">
-        <a href="https://github.com/openslide/builds/releases/download/windows-{{ row.pkgver }}/openslide-win64-{{ row.pkgver }}.zip">
-          Windows 64-bit
-        </a>
+        {% if 'win64' in row.files %}
+          <a href="https://github.com/openslide/builds/releases/download/windows-{{ row.pkgver }}/openslide-win64-{{ row.pkgver }}.zip">
+            Windows 64-bit
+          </a>
+        {% endif %}
       </td>
     </tr>
   {% endfor %}
@@ -155,6 +159,8 @@ def main():
             help='Website directory')
     parser.add_argument('--pkgver', metavar='VER',
             help='package version')
+    parser.add_argument('--files', type=Path,
+            help='directory containing files for new build')
     parser.add_argument('--linux-builder', metavar='REF',
             help='Linux builder container reference')
     parser.add_argument('--windows-builder', metavar='REF',
@@ -181,13 +187,20 @@ def main():
     if args.pkgver:
         if (
             not args.linux_builder or not args.windows_builder or
-            not args.openslide or not args.java or not args.winbuild
+            not args.openslide or not args.java or not args.winbuild or
+            not args.files
         ):
             parser.error('New build must be completely specified')
+        files = [
+            path.name.split(f'-{args.pkgver}')[0].
+                removeprefix('openslide-').removeprefix('bin-')
+            for path in args.files.iterdir()
+        ]
         records.append({
             'pkgver': args.pkgver,
             'date': dateutil.parser.parse(args.pkgver.split('-')[0]).
                     date().isoformat(),
+            'files': files,
             'linux-builder': args.linux_builder,
             'windows-builder': args.windows_builder,
             'openslide': args.openslide,
@@ -242,6 +255,7 @@ def main():
         rows.append({
             'date': record['date'],
             'pkgver': record['pkgver'],
+            'files': record['files'],
             'linux_builder': record['linux-builder'],
             'windows_builder': record['windows-builder'],
             'openslide_prev': prev('openslide'),
@@ -250,7 +264,6 @@ def main():
             'java_cur': record['openslide-java'],
             'winbuild_prev': prev('openslide-winbuild'),
             'winbuild_cur': record['openslide-winbuild'],
-            'win32': record.get('win32', False),  # temporary compat
         })
         prev_record = record
 
