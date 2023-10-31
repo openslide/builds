@@ -127,7 +127,7 @@ jobs:
         run: |
           scripts/make-index.py \
               --pkgver "${{ needs.setup.outputs.pkgver }}" \
-              --tag "windows-${{ needs.setup.outputs.pkgver }}" \
+              --tag "v${{ needs.setup.outputs.pkgver }}" \
               --files "${{ needs.build.outputs.artifact }}" \
               --linux-builder "${{ needs.setup.outputs.linux_builder_repo_and_digest }}" \
               --windows-builder "${{ needs.setup.outputs.windows_builder_repo_and_digest }}" \
@@ -165,16 +165,15 @@ jobs:
           line openslide-winbuild openslide-winbuild \
               "${{ needs.setup.outputs.winbuild_commit }}" _ >> VERSIONS.md
 
-          title="Windows build $pkgver"
+          title="Build $pkgver"
           body="$(cat VERSIONS.md)"
           git add docs
           git commit -m "$title" -m "$body"
-          git tag -a "windows-$pkgver" -m "$title" -m "$body"
-          git push origin HEAD "windows-$pkgver"
+          git tag -a "v$pkgver" -m "$title" -m "$body"
+          git push origin HEAD "v$pkgver"
 
           gh release create --notes-file - --prerelease --verify-tag \
-              --title "Windows build $pkgver" "windows-$pkgver" \
-              "${artifact}/"* <<EOF
+              --title "$title" "v$pkgver" "${artifact}/"* <<EOF
           See the [build index](https://openslide.org/builds/) for more info.
 
           $body
