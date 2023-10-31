@@ -119,7 +119,9 @@ Builds are skipped if nothing has changed.
         {{ revision_link('openslide-winbuild', row.winbuild_prev, row.winbuild_cur) }}
       </td>
       <td class="revision">
-        {{ builder_link(row.linux_builder) }}
+        {% if 'linux-x86_64' in row.files %}
+          {{ builder_link(row.linux_builder) }}
+        {% endif %}
       </td>
       <td class="revision">
         {{ builder_link(row.windows_builder) }}
