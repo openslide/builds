@@ -139,8 +139,8 @@ jobs:
           artifact="${{ needs.build.outputs.artifact }}"
           pkgver="${{ needs.setup.outputs.pkgver }}"
 
-          unzip -j "${artifact}/openslide-win32-${pkgver}.zip" \
-              "openslide-win32-${pkgver}/VERSIONS.md"
+          unzip -j "${artifact}/openslide-win64-${pkgver}.zip" \
+              "openslide-win64-${pkgver}/VERSIONS.md"
           # trim width for commit message limit
           sed -i -e 's/      |$/|/' VERSIONS.md
           pkglen=$(awk -F'|' '{print length($2) - 2; exit}' VERSIONS.md)
