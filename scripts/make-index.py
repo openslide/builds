@@ -131,9 +131,11 @@ Builds are skipped if nothing has changed.
         </a>
       </td>
       <td class="win32">
-        <a href="https://github.com/openslide/builds/releases/download/windows-{{ row.pkgver }}/openslide-win32-{{ row.pkgver }}.zip">
-          Windows 32-bit
-        </a>
+        {% if row.win32 %}
+          <a href="https://github.com/openslide/builds/releases/download/windows-{{ row.pkgver }}/openslide-win32-{{ row.pkgver }}.zip">
+            Windows 32-bit
+          </a>
+        {% endif %}
       </td>
       <td class="win64">
         <a href="https://github.com/openslide/builds/releases/download/windows-{{ row.pkgver }}/openslide-win64-{{ row.pkgver }}.zip">
@@ -248,6 +250,7 @@ def main():
             'java_cur': record['openslide-java'],
             'winbuild_prev': prev('openslide-winbuild'),
             'winbuild_cur': record['openslide-winbuild'],
+            'win32': record.get('win32', False),  # temporary compat
         })
         prev_record = record
 
