@@ -129,21 +129,21 @@ Builds are skipped if nothing has changed.
       <td class="spacer"></td>
       <td class="source">
         {% if 'winbuild' in row.files %}
-          <a href="https://github.com/openslide/builds/releases/download/windows-{{ row.pkgver }}/openslide-winbuild-{{ row.pkgver }}.zip">
+          <a href="https://github.com/openslide/builds/releases/download/{{ row.tag }}/openslide-winbuild-{{ row.pkgver }}.zip">
             Source
           </a>
         {% endif %}
       </td>
       <td class="win32">
         {% if 'win32' in row.files %}
-          <a href="https://github.com/openslide/builds/releases/download/windows-{{ row.pkgver }}/openslide-win32-{{ row.pkgver }}.zip">
+          <a href="https://github.com/openslide/builds/releases/download/{{ row.tag }}/openslide-win32-{{ row.pkgver }}.zip">
             Windows 32-bit
           </a>
         {% endif %}
       </td>
       <td class="win64">
         {% if 'win64' in row.files %}
-          <a href="https://github.com/openslide/builds/releases/download/windows-{{ row.pkgver }}/openslide-win64-{{ row.pkgver }}.zip">
+          <a href="https://github.com/openslide/builds/releases/download/{{ row.tag }}/openslide-win64-{{ row.pkgver }}.zip">
             Windows 64-bit
           </a>
         {% endif %}
@@ -161,6 +161,8 @@ def main():
             help='Website directory')
     parser.add_argument('--pkgver', metavar='VER',
             help='package version')
+    parser.add_argument('--tag',
+            help='intended Git tag')
     parser.add_argument('--files', type=Path, metavar='DIR',
             help='directory containing files for new build')
     parser.add_argument('--linux-builder', metavar='REF',
@@ -190,7 +192,7 @@ def main():
         if (
             not args.linux_builder or not args.windows_builder or
             not args.openslide or not args.java or not args.winbuild or
-            not args.files
+            not args.tag or not args.files
         ):
             parser.error('New build must be completely specified')
         files = [
@@ -202,6 +204,7 @@ def main():
             'pkgver': args.pkgver,
             'date': dateutil.parser.parse(args.pkgver.split('-')[0]).
                     date().isoformat(),
+            'tag': args.tag,
             'files': files,
             'linux-builder': args.linux_builder,
             'windows-builder': args.windows_builder,
@@ -218,7 +221,7 @@ def main():
     for record in records[:-RETAIN]:
         print(f'Deleting {record["pkgver"]}...')
         resp = requests.get(
-            f'https://api.github.com/repos/{REPO}/releases/tags/windows-{record["pkgver"]}',
+            f'https://api.github.com/repos/{REPO}/releases/tags/{record["tag"]}',
             headers=headers
         )
         if resp.status_code == 404:
@@ -257,6 +260,7 @@ def main():
         rows.append({
             'date': record['date'],
             'pkgver': record['pkgver'],
+            'tag': record['tag'],
             'files': record['files'],
             'linux_builder': record['linux-builder'],
             'windows_builder': record['windows-builder'],
