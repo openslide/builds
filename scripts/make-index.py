@@ -161,7 +161,7 @@ def main():
             help='Website directory')
     parser.add_argument('--pkgver', metavar='VER',
             help='package version')
-    parser.add_argument('--files', type=Path,
+    parser.add_argument('--files', type=Path, metavar='DIR',
             help='directory containing files for new build')
     parser.add_argument('--linux-builder', metavar='REF',
             help='Linux builder container reference')
