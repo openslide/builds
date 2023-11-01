@@ -100,7 +100,7 @@ Builds are skipped if nothing has changed.
     <th>Date</th>
     <th class="repo">openslide</th>
     <th class="repo">openslide-java</th>
-    <th class="repo">openslide-winbuild</th>
+    <th class="repo">openslide-bin</th>
     <th class="repo">linux-builder</th>
     <th class="repo">winbuild-builder</th>
     <th></th>
@@ -116,7 +116,7 @@ Builds are skipped if nothing has changed.
         {{ revision_link('openslide-java', row.java_prev, row.java_cur) }}
       </td>
       <td class="revision">
-        {{ revision_link('openslide-winbuild', row.winbuild_prev, row.winbuild_cur) }}
+        {{ revision_link('openslide-bin', row.bin_prev, row.bin_cur) }}
       </td>
       <td class="revision">
         {% if 'linux-x86_64' in row.files %}
@@ -155,7 +155,7 @@ Builds are skipped if nothing has changed.
 
 def main():
     # Parse command line
-    parser = argparse.ArgumentParser(description='Update winbuild index.')
+    parser = argparse.ArgumentParser(description='Update build index.')
     parser.add_argument('--dir', type=Path,
             default=Path(sys.argv[0]).resolve().parent.parent / 'docs',
             help='Website directory')
@@ -173,8 +173,8 @@ def main():
             help='commit ID for OpenSlide')
     parser.add_argument('--java', metavar='COMMIT',
             help='commit ID for OpenSlide Java')
-    parser.add_argument('--winbuild', metavar='COMMIT',
-            help='commit ID for openslide-winbuild')
+    parser.add_argument('--bin', metavar='COMMIT',
+            help='commit ID for openslide-bin')
     args = parser.parse_args()
 
     # Get token
@@ -191,7 +191,7 @@ def main():
     if args.pkgver:
         if (
             not args.linux_builder or not args.windows_builder or
-            not args.openslide or not args.java or not args.winbuild or
+            not args.openslide or not args.java or not args.bin or
             not args.tag or not args.files
         ):
             parser.error('New build must be completely specified')
@@ -209,7 +209,7 @@ def main():
             'windows-builder': args.windows_builder,
             'openslide': args.openslide,
             'openslide-java': args.java,
-            'openslide-winbuild': args.winbuild,
+            'openslide-bin': args.bin,
         })
 
     # Update records
@@ -267,8 +267,8 @@ def main():
             'openslide_cur': record['openslide'],
             'java_prev': prev('openslide-java'),
             'java_cur': record['openslide-java'],
-            'winbuild_prev': prev('openslide-winbuild'),
-            'winbuild_cur': record['openslide-winbuild'],
+            'bin_prev': prev('openslide-bin'),
+            'bin_cur': record['openslide-bin'],
         })
         prev_record = record
 

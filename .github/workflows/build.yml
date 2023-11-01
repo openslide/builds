@@ -28,7 +28,7 @@ jobs:
       pkgver: ${{ steps.params.outputs.pkgver }}
       openslide_commit: ${{ steps.params.outputs.openslide_commit }}
       java_commit: ${{ steps.params.outputs.java_commit }}
-      winbuild_commit: ${{ steps.params.outputs.winbuild_commit }}
+      bin_commit: ${{ steps.params.outputs.bin_commit }}
       changed: ${{ steps.params.outputs.changed }}
       stale: ${{ steps.params.outputs.stale }}
     steps:
@@ -36,12 +36,12 @@ jobs:
         uses: actions/checkout@v4
       - name: Find Linux builder container digest
         id: find-linux
-        uses: openslide/openslide-winbuild/.github/find-container-digest@main
+        uses: openslide/openslide-bin/.github/find-container-digest@main
         with:
           builder_image: linux
       - name: Find Windows builder container digest
         id: find-windows
-        uses: openslide/openslide-winbuild/.github/find-container-digest@main
+        uses: openslide/openslide-bin/.github/find-container-digest@main
         with:
           builder_image: windows
       - name: Calculate parameters
@@ -62,7 +62,7 @@ jobs:
               echo "Repository is stale"
               echo "stale=true" >> $GITHUB_OUTPUT
           fi
-          for repo in openslide openslide-java openslide-winbuild; do
+          for repo in openslide openslide-java openslide-bin; do
               old=$(jq -r ".builds[-1][\"${repo}\"]" docs/index.json)
               new=$(curl --no-progress-meter \
                   -H "Accept: application/vnd.github.v3+json" \
@@ -95,7 +95,7 @@ jobs:
     name: Build
     needs: setup
     if: needs.setup.outputs.changed
-    uses: openslide/openslide-winbuild/.github/workflows/build.yml@main
+    uses: openslide/openslide-bin/.github/workflows/build.yml@main
     with:
       linux_builder_repo_and_digest: ${{ needs.setup.outputs.linux_builder_repo_and_digest }}
       windows_builder_repo_and_digest: ${{ needs.setup.outputs.windows_builder_repo_and_digest }}
@@ -103,8 +103,8 @@ jobs:
       openslide_ref: ${{ needs.setup.outputs.openslide_commit }}
       openslide_java_repo: openslide/openslide-java
       openslide_java_ref: ${{ needs.setup.outputs.java_commit }}
-      openslide_winbuild_repo: openslide/openslide-winbuild
-      openslide_winbuild_ref: ${{ needs.setup.outputs.winbuild_commit }}
+      openslide_bin_repo: openslide/openslide-bin
+      openslide_bin_ref: ${{ needs.setup.outputs.bin_commit }}
       pkgver: ${{ needs.setup.outputs.pkgver }}
 
   upload:
@@ -133,7 +133,7 @@ jobs:
               --windows-builder "${{ needs.setup.outputs.windows_builder_repo_and_digest }}" \
               --openslide "${{ needs.setup.outputs.openslide_commit }}" \
               --java "${{ needs.setup.outputs.java_commit }}" \
-              --winbuild "${{ needs.setup.outputs.winbuild_commit }}"
+              --bin "${{ needs.setup.outputs.bin_commit }}"
       - name: Commit, tag, push, create release
         env:
           GITHUB_TOKEN: ${{ github.token }}
@@ -162,8 +162,8 @@ jobs:
               "${{ needs.setup.outputs.openslide_commit }}" "**"
           update_line "OpenSlide Java" openslide-java \
               "${{ needs.setup.outputs.java_commit }}" "**"
-          line openslide-winbuild openslide-winbuild \
-              "${{ needs.setup.outputs.winbuild_commit }}" _ >> VERSIONS.md
+          line openslide-bin openslide-bin \
+              "${{ needs.setup.outputs.bin_commit }}" _ >> VERSIONS.md
 
           title="Build $pkgver"
           body="$(cat VERSIONS.md)"
