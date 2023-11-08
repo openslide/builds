@@ -78,7 +78,7 @@ jobs:
                   echo "    -> unchanged"
               fi
           done
-          for repo in "linux|${{ steps.find.outputs.linux_builder_repo_and_digest }}" "windows|${{ steps.find.outputs.windows_builder_repo_and_digest }}"; do
+          for repo in "linux|${{ steps.find-linux.outputs.builder_repo_and_digest }}" "windows|${{ steps.find-windows.outputs.builder_repo_and_digest }}"; do
               name="${repo%%|*}"
               old=$(jq -r ".builds[-1][\"${name}-builder\"]" docs/index.json)
               new="${repo##*|}"
