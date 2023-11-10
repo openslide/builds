@@ -139,10 +139,10 @@ Builds are skipped if nothing has changed.
         {{ artifact_link(row, 'winbuild', 'winbuild', '.zip', 'Source') }}
       </td>
       <td class="win32">
-        {{ artifact_link(row, 'win32', 'win32', '.zip', 'Windows 32-bit') }}
+        {{ artifact_link(row, 'win32', 'win32', '.zip', 'Windows x86') }}
       </td>
       <td class="win64">
-        {{ artifact_link(row, 'win64', 'win64', '.zip', 'Windows 64-bit') }}
+        {{ artifact_link(row, 'win64', 'win64', '.zip', 'Windows x64') }}
       </td>
     </tr>
   {% endfor %}
