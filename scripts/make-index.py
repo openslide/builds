@@ -95,6 +95,14 @@ Builds are skipped if nothing has changed.
   {% endif %}
 {% endmacro %}
 
+{% macro artifact_link(row, id, prefix, suffix, desc) %}
+  {% if id in row.files %}
+    <a href="https://github.com/openslide/builds/releases/download/{{ row.tag }}/openslide-{{ prefix }}-{{ row.pkgver }}{{ suffix }}">
+      {{ desc }}
+    </a>
+  {% endif %}
+{% endmacro %}
+
 <table>
   <tr>
     <th>Date</th>
@@ -128,25 +136,13 @@ Builds are skipped if nothing has changed.
       </td>
       <td class="spacer"></td>
       <td class="source">
-        {% if 'winbuild' in row.files %}
-          <a href="https://github.com/openslide/builds/releases/download/{{ row.tag }}/openslide-winbuild-{{ row.pkgver }}.zip">
-            Source
-          </a>
-        {% endif %}
+        {{ artifact_link(row, 'winbuild', 'winbuild', '.zip', 'Source') }}
       </td>
       <td class="win32">
-        {% if 'win32' in row.files %}
-          <a href="https://github.com/openslide/builds/releases/download/{{ row.tag }}/openslide-win32-{{ row.pkgver }}.zip">
-            Windows 32-bit
-          </a>
-        {% endif %}
+        {{ artifact_link(row, 'win32', 'win32', '.zip', 'Windows 32-bit') }}
       </td>
       <td class="win64">
-        {% if 'win64' in row.files %}
-          <a href="https://github.com/openslide/builds/releases/download/{{ row.tag }}/openslide-win64-{{ row.pkgver }}.zip">
-            Windows 64-bit
-          </a>
-        {% endif %}
+        {{ artifact_link(row, 'win64', 'win64', '.zip', 'Windows 64-bit') }}
       </td>
     </tr>
   {% endfor %}
