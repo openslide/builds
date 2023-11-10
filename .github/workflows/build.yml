@@ -48,9 +48,9 @@ jobs:
         id: params
         run: |
           set -euo pipefail
-          suffix="$(date +%Y%m%d)-nightly"
+          suffix="$(date +%Y%m%d).nightly"
           echo "suffix=$suffix" >> $GITHUB_OUTPUT
-          duplicate=$(jq ".builds[] | select(.version | endswith(\"$suffix\"))" \
+          duplicate=$(jq ".builds[] | select(.version | endswith(\"+$suffix\"))" \
               docs/index.json)
           if [ -n "$duplicate" ]; then
               echo "Found existing nightly build with suffix $suffix"
@@ -105,7 +105,7 @@ jobs:
       openslide_java_ref: ${{ needs.setup.outputs.java_commit }}
       openslide_bin_repo: openslide/openslide-bin
       openslide_bin_ref: ${{ needs.setup.outputs.bin_commit }}
-      pkgver: ${{ needs.setup.outputs.suffix }}
+      suffix: ${{ needs.setup.outputs.suffix }}
 
   upload:
     name: Upload
@@ -128,7 +128,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           scripts/make-index.py \
-              --version "${{ needs.setup.outputs.suffix }}" \
+              --version "${{ needs.build.outputs.version }}" \
               --files "${{ needs.build.outputs.artifact }}" \
               --linux-builder "${{ needs.setup.outputs.linux_builder_repo_and_digest }}" \
               --windows-builder "${{ needs.setup.outputs.windows_builder_repo_and_digest }}" \
@@ -140,10 +140,10 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           artifact="${{ needs.build.outputs.artifact }}"
-          version="${{ needs.setup.outputs.suffix }}"
+          version="${{ needs.build.outputs.version }}"
 
-          unzip -j "${artifact}/openslide-win64-${version}.zip" \
-              "openslide-win64-${version}/VERSIONS.md"
+          unzip -j "${artifact}/openslide-bin-${version}-windows-x64.zip" \
+              "openslide-bin-${version}-windows-x64/VERSIONS.md"
           # trim width for commit message limit
           sed -i -e 's/      |$/|/' VERSIONS.md
           pkglen=$(awk -F'|' '{print length($2) - 2; exit}' VERSIONS.md)

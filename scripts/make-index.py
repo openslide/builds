@@ -137,12 +137,14 @@ Builds are skipped if nothing has changed.
       <td class="spacer"></td>
       <td class="source">
         {{ artifact_link(row, 'winbuild', 'winbuild', '.zip', 'Source') }}
+        {{ artifact_link(row, 'source', 'bin', '.tar.gz', 'Source') }}
       </td>
       <td class="win32">
         {{ artifact_link(row, 'win32', 'win32', '.zip', 'Windows x86') }}
       </td>
       <td class="win64">
         {{ artifact_link(row, 'win64', 'win64', '.zip', 'Windows x64') }}
+        {{ artifact_link(row, 'windows-x64', 'bin', '-windows-x64.zip', 'Windows x64') }}
       </td>
     </tr>
   {% endfor %}
@@ -191,12 +193,14 @@ def main():
             parser.error('New build must be completely specified')
         records.append({
             'version': args.version,
-            'date': dateutil.parser.parse(args.version.split('-')[0]).
-                    date().isoformat(),
+            'date': dateutil.parser.parse(
+                args.version.split('+')[1].split('.')[0]
+            ).date().isoformat(),
             'tag': 'v' + args.version,
             'files': sorted(
-                path.name.split(f'-{args.version}')[0].
-                    removeprefix('openslide-').removeprefix('bin-')
+                'source'
+                    if path.name.endswith(f'{args.version}.tar.gz')
+                    else path.name.split(f'{args.version}-')[1].split('.')[0]
                 for path in args.files.iterdir()
             ),
             'linux-builder': args.linux_builder,
