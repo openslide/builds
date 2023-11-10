@@ -56,7 +56,7 @@ template = Template('''<!doctype html>
   td.spacer {
     padding-right: 25px;
   }
-  td.win64 {
+  td.linux {
     padding-right: 5px;
   }
   tr {
@@ -112,7 +112,7 @@ Builds are skipped if nothing has changed.
     <th class="repo">linux-builder</th>
     <th class="repo">winbuild-builder</th>
     <th></th>
-    <th colspan="2">Downloads</th>
+    <th colspan="4">Downloads</th>
   </tr>
   {% for row in rows %}
     <tr>
@@ -140,6 +140,12 @@ Builds are skipped if nothing has changed.
       </td>
       <td class="win64">
         {{ artifact_link(row, '-windows-x64.zip', 'Windows x64') }}
+      </td>
+      <td class="macos">
+        {{ artifact_link(row, '-macos-arm64-x86_64.tar.xz', 'macOS') }}
+      </td>
+      <td class="linux">
+        {{ artifact_link(row, '-linux-x86_64.tar.xz', 'Linux') }}
       </td>
     </tr>
   {% endfor %}

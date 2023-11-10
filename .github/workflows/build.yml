@@ -98,6 +98,7 @@ jobs:
     uses: openslide/openslide-bin/.github/workflows/build.yml@main
     with:
       linux_builder_repo_and_digest: ${{ needs.setup.outputs.linux_builder_repo_and_digest }}
+      macos_enable: true
       windows_builder_repo_and_digest: ${{ needs.setup.outputs.windows_builder_repo_and_digest }}
       openslide_repo: openslide/openslide
       openslide_ref: ${{ needs.setup.outputs.openslide_commit }}
