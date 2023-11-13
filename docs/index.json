@@ -427,7 +427,21 @@
       "pkgver": "20231111-nightly",
       "tag": "v20231111-nightly",
       "windows-builder": "ghcr.io/openslide/winbuild-builder@sha256:3abbdf9dab320558ae6a2bf9c8ab6c933acfa31fbec3ac7153ff56bff1a42853"
+    },
+    {
+      "date": "2023-11-13",
+      "files": [
+        "win64",
+        "winbuild"
+      ],
+      "linux-builder": "ghcr.io/openslide/linux-builder@sha256:c41467dcc6b2e0324c9de231d018a323ac237f0844b62d2c2aa36f9e5c79ef99",
+      "openslide": "c35616a89c26a8c8b2f80b1dc28dce6e1e7d044f",
+      "openslide-bin": "0db625b4b895b1f4209a0429ecb16082a3af5b3d",
+      "openslide-java": "4179cdd590a7960d142e912f2cb946e4e815903f",
+      "pkgver": "20231113-nightly",
+      "tag": "v20231113-nightly",
+      "windows-builder": "ghcr.io/openslide/winbuild-builder@sha256:3abbdf9dab320558ae6a2bf9c8ab6c933acfa31fbec3ac7153ff56bff1a42853"
     }
   ],
-  "last_update": 1699669811
+  "last_update": 1699839582
 }
