@@ -116,6 +116,10 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Update Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
       - name: Check out repo
         uses: actions/checkout@v4
       - name: Install dependencies
@@ -142,34 +146,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
+          set -euo pipefail
+
           version="${{ needs.build.outputs.version }}"
 
-          unzip -j "upload/openslide-bin-${version}-windows-x64.zip" \
-              "openslide-bin-${version}-windows-x64/VERSIONS.md"
-          # trim width for commit message limit
-          sed -i -e 's/      |$/|/' VERSIONS.md
-          pkglen=$(awk -F'|' '{print length($2) - 2; exit}' VERSIONS.md)
-          verlen=$(awk -F'|' '{print length($3) - 2; exit}' VERSIONS.md)
-          line() {
-              # args: friendly-name repo-name commit-hash emphasis
-              printf "| %-${pkglen}s | %-${verlen}s |" \
-                  "$4$1$4" "${4}openslide/${2}@${3:0:8}${4}"
-          }
-          update_line() {
-              # args: friendly-name repo-name commit-hash emphasis
-              local new="$(line "$@")"
-              local escaped="$(sed 's/*/\\*/g' <<<"$4$1$4")"
-              sed -i -e "/$escaped/ s^.*^$new^" VERSIONS.md
-          }
-          update_line OpenSlide openslide \
-              "${{ needs.setup.outputs.openslide_commit }}" "**"
-          update_line "OpenSlide Java" openslide-java \
-              "${{ needs.setup.outputs.java_commit }}" "**"
-          line openslide-bin openslide-bin \
-              "${{ needs.setup.outputs.bin_commit }}" _ >> VERSIONS.md
+          tar xf "upload/openslide-bin-${version}.tar.gz"
 
           title="Build $version"
-          body="$(cat VERSIONS.md)"
+          # trim width for commit message limit
+          body="$(openslide-bin-${version}/bintool versions \
+              upload/*.{tar.xz,zip} | \
+              sed 's/    |$/|/')"
+
           git add site
           git commit -m "$title" -m "$body"
           git tag -a "v$version" -m "$title" -m "$body"
