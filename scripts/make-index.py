@@ -157,8 +157,6 @@ def main():
             help='Website directory')
     parser.add_argument('--version', metavar='VER',
             help='package version')
-    parser.add_argument('--tag',
-            help='intended Git tag')
     parser.add_argument('--files', type=Path, metavar='DIR',
             help='directory containing files for new build')
     parser.add_argument('--linux-builder', metavar='REF',
@@ -188,14 +186,14 @@ def main():
         if (
             not args.linux_builder or not args.windows_builder or
             not args.openslide or not args.java or not args.bin or
-            not args.tag or not args.files
+            not args.files
         ):
             parser.error('New build must be completely specified')
         records.append({
             'version': args.version,
             'date': dateutil.parser.parse(args.version.split('-')[0]).
                     date().isoformat(),
-            'tag': args.tag,
+            'tag': 'v' + args.version,
             'files': sorted(
                 path.name.split(f'-{args.version}')[0].
                     removeprefix('openslide-').removeprefix('bin-')

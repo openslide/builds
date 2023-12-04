@@ -127,7 +127,6 @@ jobs:
         run: |
           scripts/make-index.py \
               --version "${{ needs.setup.outputs.suffix }}" \
-              --tag "v${{ needs.setup.outputs.suffix }}" \
               --files "${{ needs.build.outputs.artifact }}" \
               --linux-builder "${{ needs.setup.outputs.linux_builder_repo_and_digest }}" \
               --windows-builder "${{ needs.setup.outputs.windows_builder_repo_and_digest }}" \
