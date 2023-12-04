@@ -25,7 +25,7 @@ jobs:
     outputs:
       linux_builder_repo_and_digest: ${{ steps.find-linux.outputs.builder_repo_and_digest }}
       windows_builder_repo_and_digest: ${{ steps.find-windows.outputs.builder_repo_and_digest }}
-      pkgver: ${{ steps.params.outputs.pkgver }}
+      suffix: ${{ steps.params.outputs.suffix }}
       openslide_commit: ${{ steps.params.outputs.openslide_commit }}
       java_commit: ${{ steps.params.outputs.java_commit }}
       bin_commit: ${{ steps.params.outputs.bin_commit }}
@@ -48,12 +48,12 @@ jobs:
         id: params
         run: |
           set -euo pipefail
-          pkgver="$(date +%Y%m%d)-nightly"
-          echo "pkgver=$pkgver" >> $GITHUB_OUTPUT
-          duplicate=$(jq ".builds[] | select(.pkgver == \"$pkgver\")" \
+          suffix="$(date +%Y%m%d)-nightly"
+          echo "suffix=$suffix" >> $GITHUB_OUTPUT
+          duplicate=$(jq ".builds[] | select(.version | endswith(\"$suffix\"))" \
               docs/index.json)
           if [ -n "$duplicate" ]; then
-              echo "Found existing nightly build $pkgver"
+              echo "Found existing nightly build with suffix $suffix"
               exit 1
           fi
           # Modify the repository at least every 30 days so GitHub doesn't
@@ -105,7 +105,7 @@ jobs:
       openslide_java_ref: ${{ needs.setup.outputs.java_commit }}
       openslide_bin_repo: openslide/openslide-bin
       openslide_bin_ref: ${{ needs.setup.outputs.bin_commit }}
-      pkgver: ${{ needs.setup.outputs.pkgver }}
+      pkgver: ${{ needs.setup.outputs.suffix }}
 
   upload:
     name: Upload
@@ -126,8 +126,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           scripts/make-index.py \
-              --pkgver "${{ needs.setup.outputs.pkgver }}" \
-              --tag "v${{ needs.setup.outputs.pkgver }}" \
+              --version "${{ needs.setup.outputs.suffix }}" \
+              --tag "v${{ needs.setup.outputs.suffix }}" \
               --files "${{ needs.build.outputs.artifact }}" \
               --linux-builder "${{ needs.setup.outputs.linux_builder_repo_and_digest }}" \
               --windows-builder "${{ needs.setup.outputs.windows_builder_repo_and_digest }}" \
@@ -139,10 +139,10 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           artifact="${{ needs.build.outputs.artifact }}"
-          pkgver="${{ needs.setup.outputs.pkgver }}"
+          version="${{ needs.setup.outputs.suffix }}"
 
-          unzip -j "${artifact}/openslide-win64-${pkgver}.zip" \
-              "openslide-win64-${pkgver}/VERSIONS.md"
+          unzip -j "${artifact}/openslide-win64-${version}.zip" \
+              "openslide-win64-${version}/VERSIONS.md"
           # trim width for commit message limit
           sed -i -e 's/      |$/|/' VERSIONS.md
           pkglen=$(awk -F'|' '{print length($2) - 2; exit}' VERSIONS.md)
@@ -165,15 +165,15 @@ jobs:
           line openslide-bin openslide-bin \
               "${{ needs.setup.outputs.bin_commit }}" _ >> VERSIONS.md
 
-          title="Build $pkgver"
+          title="Build $version"
           body="$(cat VERSIONS.md)"
           git add docs
           git commit -m "$title" -m "$body"
-          git tag -a "v$pkgver" -m "$title" -m "$body"
-          git push origin HEAD "v$pkgver"
+          git tag -a "v$version" -m "$title" -m "$body"
+          git push origin HEAD "v$version"
 
           gh release create --notes-file - --prerelease --verify-tag \
-              --title "$title" "v$pkgver" "${artifact}/"* <<EOF
+              --title "$title" "v$version" "${artifact}/"* <<EOF
           See the [build index](https://openslide.org/builds/) for more info.
 
           $body

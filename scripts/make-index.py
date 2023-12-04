@@ -97,7 +97,7 @@ Builds are skipped if nothing has changed.
 
 {% macro artifact_link(row, id, prefix, suffix, desc) %}
   {% if id in row.files %}
-    <a href="https://github.com/openslide/builds/releases/download/{{ row.tag }}/openslide-{{ prefix }}-{{ row.pkgver }}{{ suffix }}">
+    <a href="https://github.com/openslide/builds/releases/download/{{ row.tag }}/openslide-{{ prefix }}-{{ row.version }}{{ suffix }}">
       {{ desc }}
     </a>
   {% endif %}
@@ -155,7 +155,7 @@ def main():
     parser.add_argument('--dir', type=Path,
             default=Path(sys.argv[0]).resolve().parent.parent / 'docs',
             help='Website directory')
-    parser.add_argument('--pkgver', metavar='VER',
+    parser.add_argument('--version', metavar='VER',
             help='package version')
     parser.add_argument('--tag',
             help='intended Git tag')
@@ -184,7 +184,7 @@ def main():
         records = []
 
     # Build new record
-    if args.pkgver:
+    if args.version:
         if (
             not args.linux_builder or not args.windows_builder or
             not args.openslide or not args.java or not args.bin or
@@ -192,12 +192,12 @@ def main():
         ):
             parser.error('New build must be completely specified')
         records.append({
-            'pkgver': args.pkgver,
-            'date': dateutil.parser.parse(args.pkgver.split('-')[0]).
+            'version': args.version,
+            'date': dateutil.parser.parse(args.version.split('-')[0]).
                     date().isoformat(),
             'tag': args.tag,
             'files': sorted(
-                path.name.split(f'-{args.pkgver}')[0].
+                path.name.split(f'-{args.version}')[0].
                     removeprefix('openslide-').removeprefix('bin-')
                 for path in args.files.iterdir()
             ),
@@ -214,7 +214,7 @@ def main():
         'Authorization': f'token {token}',
     }
     for record in records[:-RETAIN]:
-        print(f'Deleting {record["pkgver"]}...')
+        print(f'Deleting {record["version"]}...')
         resp = requests.get(
             f'https://api.github.com/repos/{REPO}/releases/tags/{record["tag"]}',
             headers=headers
@@ -254,7 +254,7 @@ def main():
                 return None
         rows.append({
             'date': record['date'],
-            'pkgver': record['pkgver'],
+            'version': record['version'],
             'tag': record['tag'],
             'files': record['files'],
             'linux_builder': record['linux-builder'],
