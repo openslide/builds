@@ -7,7 +7,7 @@ on:
     - cron: "15 0 * * *"
 
 permissions:
-  contents: write
+  contents: read
   packages: read
 
 concurrency: build
@@ -112,6 +112,8 @@ jobs:
     needs: [setup, build]
     if: needs.setup.outputs.changed
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Check out repo
         uses: actions/checkout@v4
@@ -183,6 +185,8 @@ jobs:
     needs: setup
     if: needs.setup.outputs.stale && ! needs.setup.outputs.changed
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Check out repo
         uses: actions/checkout@v4
