@@ -120,16 +120,18 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get install python3-dateutil python3-jinja2
       - name: Download artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
-          name: ${{ needs.build.outputs.artifact }}
+          pattern: "openslide-bin-*"
+          path: upload
+          merge-multiple: true
       - name: Update index
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           scripts/make-index.py \
               --version "${{ needs.build.outputs.version }}" \
-              --files "${{ needs.build.outputs.artifact }}" \
+              --files upload \
               --linux-builder "${{ needs.setup.outputs.linux_builder_repo_and_digest }}" \
               --windows-builder "${{ needs.setup.outputs.windows_builder_repo_and_digest }}" \
               --openslide "${{ needs.setup.outputs.openslide_commit }}" \
@@ -139,10 +141,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
-          artifact="${{ needs.build.outputs.artifact }}"
           version="${{ needs.build.outputs.version }}"
 
-          unzip -j "${artifact}/openslide-bin-${version}-windows-x64.zip" \
+          unzip -j "upload/openslide-bin-${version}-windows-x64.zip" \
               "openslide-bin-${version}-windows-x64/VERSIONS.md"
           # trim width for commit message limit
           sed -i -e 's/      |$/|/' VERSIONS.md
@@ -174,7 +175,7 @@ jobs:
           git push origin HEAD "v$version"
 
           gh release create --notes-file - --prerelease --verify-tag \
-              --title "$title" "v$version" "${artifact}/"* <<EOF
+              --title "$title" "v$version" upload/* <<EOF
           See the [build index](https://openslide.org/builds/) for more info.
 
           $body
