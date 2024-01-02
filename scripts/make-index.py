@@ -112,7 +112,7 @@ Builds are skipped if nothing has changed.
     <th class="repo">linux-builder</th>
     <th class="repo">winbuild-builder</th>
     <th></th>
-    <th colspan="3">Downloads</th>
+    <th colspan="2">Downloads</th>
   </tr>
   {% for row in rows %}
     <tr>
@@ -138,9 +138,6 @@ Builds are skipped if nothing has changed.
       <td class="source">
         {{ artifact_link(row, 'winbuild', 'winbuild', '.zip', 'Source') }}
         {{ artifact_link(row, 'source', 'bin', '.tar.gz', 'Source') }}
-      </td>
-      <td class="win32">
-        {{ artifact_link(row, 'win32', 'win32', '.zip', 'Windows x86') }}
       </td>
       <td class="win64">
         {{ artifact_link(row, 'win64', 'win64', '.zip', 'Windows x64') }}
