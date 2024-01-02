@@ -97,7 +97,7 @@ Builds are skipped if nothing has changed.
 
 {% macro artifact_link(row, id, prefix, suffix, desc) %}
   {% if id in row.files %}
-    <a href="https://github.com/openslide/builds/releases/download/{{ row.tag }}/openslide-{{ prefix }}-{{ row.version }}{{ suffix }}">
+    <a href="https://github.com/openslide/builds/releases/download/v{{ row.version }}/openslide-{{ prefix }}-{{ row.version }}{{ suffix }}">
       {{ desc }}
     </a>
   {% endif %}
@@ -196,7 +196,6 @@ def main():
             'date': dateutil.parser.parse(
                 args.version.split('+')[1].split('.')[0]
             ).date().isoformat(),
-            'tag': 'v' + args.version,
             'files': sorted(
                 'source'
                     if path.name.endswith(f'{args.version}.tar.gz')
@@ -218,7 +217,7 @@ def main():
     for record in records[:-RETAIN]:
         print(f'Deleting {record["version"]}...')
         resp = requests.get(
-            f'https://api.github.com/repos/{REPO}/releases/tags/{record["tag"]}',
+            f'https://api.github.com/repos/{REPO}/releases/tags/v{record["version"]}',
             headers=headers
         )
         if resp.status_code == 404:
@@ -257,7 +256,6 @@ def main():
         rows.append({
             'date': record['date'],
             'version': record['version'],
-            'tag': record['tag'],
             'files': record['files'],
             'linux_builder': record['linux-builder'],
             'windows_builder': record['windows-builder'],
