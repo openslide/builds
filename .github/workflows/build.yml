@@ -51,19 +51,19 @@ jobs:
           suffix="$(date +%Y%m%d).nightly"
           echo "suffix=$suffix" >> $GITHUB_OUTPUT
           duplicate=$(jq ".builds[] | select(.version | endswith(\"+$suffix\"))" \
-              docs/index.json)
+              site/index.json)
           if [ -n "$duplicate" ]; then
               echo "Found existing nightly build with suffix $suffix"
               exit 1
           fi
           # Modify the repository at least every 30 days so GitHub doesn't
           # disable the workflow
-          if [ $(( $(jq .last_update docs/index.json) + 86400 * 30 )) -lt $(date +%s) ]; then
+          if [ $(( $(jq .last_update site/index.json) + 86400 * 30 )) -lt $(date +%s) ]; then
               echo "Repository is stale"
               echo "stale=true" >> $GITHUB_OUTPUT
           fi
           for repo in openslide openslide-java openslide-bin; do
-              old=$(jq -r ".builds[-1][\"${repo}\"]" docs/index.json)
+              old=$(jq -r ".builds[-1][\"${repo}\"]" site/index.json)
               new=$(curl --no-progress-meter \
                   -H "Accept: application/vnd.github.v3+json" \
                   -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
@@ -80,7 +80,7 @@ jobs:
           done
           for repo in "linux|${{ steps.find-linux.outputs.builder_repo_and_digest }}" "windows|${{ steps.find-windows.outputs.builder_repo_and_digest }}"; do
               name="${repo%%|*}"
-              old=$(jq -r ".builds[-1][\"${name}-builder\"]" docs/index.json)
+              old=$(jq -r ".builds[-1][\"${name}-builder\"]" site/index.json)
               new="${repo##*|}"
               echo "$name builder container: $new"
               if [ "$old" != "$new" ]; then
@@ -169,7 +169,7 @@ jobs:
 
           title="Build $version"
           body="$(cat VERSIONS.md)"
-          git add docs
+          git add site
           git commit -m "$title" -m "$body"
           git tag -a "v$version" -m "$title" -m "$body"
           git push origin HEAD "v$version"
@@ -198,6 +198,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           scripts/make-index.py
-          git add docs
+          git add site
           git commit -m "Update timestamp"
           git push

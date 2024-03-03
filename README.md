@@ -6,7 +6,7 @@ This repo contains [nightly builds of OpenSlide][builds].
 
 The [builds][workflow] are run in GitHub Actions.  The artifacts are hosted
 in [GitHub releases][releases] in this repo, and the [index][builds] is
-hosted in GitHub Pages from the [docs](docs) directory of this branch.
+deployed to GitHub Pages from the [site](site) directory of this branch.
 GitHub embeds this repo's Pages site into the main OpenSlide website at
 [openslide.org/builds](https://openslide.org/builds/), so the name of this
 repository directly affects the layout of the OpenSlide site.

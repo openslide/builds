@@ -152,7 +152,7 @@ def main():
     # Parse command line
     parser = argparse.ArgumentParser(description='Update build index.')
     parser.add_argument('--dir', type=Path,
-            default=Path(sys.argv[0]).resolve().parent.parent / 'docs',
+            default=Path(sys.argv[0]).resolve().parent.parent / 'site',
             help='Website directory')
     parser.add_argument('--version', metavar='VER',
             help='package version')
