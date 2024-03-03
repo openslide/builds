@@ -181,6 +181,15 @@ jobs:
           $body
           EOF
 
+  deploy:
+    name: Deploy website
+    needs: [upload]
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/pages.yml
+
   keepalive:
     name: Keepalive
     needs: setup
