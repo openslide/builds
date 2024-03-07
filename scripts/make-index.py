@@ -95,9 +95,9 @@ Builds are skipped if nothing has changed.
   {% endif %}
 {% endmacro %}
 
-{% macro artifact_link(row, id, prefix, suffix, desc) %}
+{% macro artifact_link(row, id, suffix, desc) %}
   {% if id in row.files %}
-    <a href="https://github.com/openslide/builds/releases/download/v{{ row.version }}/openslide-{{ prefix }}-{{ row.version }}{{ suffix }}">
+    <a href="https://github.com/openslide/builds/releases/download/v{{ row.version }}/openslide-bin-{{ row.version }}{{ suffix }}">
       {{ desc }}
     </a>
   {% endif %}
@@ -136,12 +136,10 @@ Builds are skipped if nothing has changed.
       </td>
       <td class="spacer"></td>
       <td class="source">
-        {{ artifact_link(row, 'winbuild', 'winbuild', '.zip', 'Source') }}
-        {{ artifact_link(row, 'source', 'bin', '.tar.gz', 'Source') }}
+        {{ artifact_link(row, 'source', '.tar.gz', 'Source') }}
       </td>
       <td class="win64">
-        {{ artifact_link(row, 'win64', 'win64', '.zip', 'Windows x64') }}
-        {{ artifact_link(row, 'windows-x64', 'bin', '-windows-x64.zip', 'Windows x64') }}
+        {{ artifact_link(row, 'windows-x64', '-windows-x64.zip', 'Windows x64') }}
       </td>
     </tr>
   {% endfor %}
