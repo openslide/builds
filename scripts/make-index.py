@@ -95,8 +95,8 @@ Builds are skipped if nothing has changed.
   {% endif %}
 {% endmacro %}
 
-{% macro artifact_link(row, id, suffix, desc) %}
-  {% if id in row.files %}
+{% macro artifact_link(row, suffix, desc) %}
+  {% if suffix in row.files %}
     <a href="https://github.com/openslide/builds/releases/download/v{{ row.version }}/openslide-bin-{{ row.version }}{{ suffix }}">
       {{ desc }}
     </a>
@@ -127,7 +127,7 @@ Builds are skipped if nothing has changed.
         {{ revision_link('openslide-bin', row.bin_prev, row.bin_cur) }}
       </td>
       <td class="revision">
-        {% if 'linux-x86_64' in row.files %}
+        {% if '-linux-x86_64.tar.xz' in row.files %}
           {{ builder_link(row.linux_builder) }}
         {% endif %}
       </td>
@@ -136,10 +136,10 @@ Builds are skipped if nothing has changed.
       </td>
       <td class="spacer"></td>
       <td class="source">
-        {{ artifact_link(row, 'source', '.tar.gz', 'Source') }}
+        {{ artifact_link(row, '.tar.gz', 'Source') }}
       </td>
       <td class="win64">
-        {{ artifact_link(row, 'windows-x64', '-windows-x64.zip', 'Windows x64') }}
+        {{ artifact_link(row, '-windows-x64.zip', 'Windows x64') }}
       </td>
     </tr>
   {% endfor %}
@@ -192,9 +192,7 @@ def main():
                 args.version.split('+')[1].split('.')[0]
             ).date().isoformat(),
             'files': sorted(
-                'source'
-                    if path.name.endswith(f'{args.version}.tar.gz')
-                    else path.name.split(f'{args.version}-')[1].split('.')[0]
+                path.name.split(f'{args.version}')[1]
                 for path in args.files.iterdir()
             ),
             'linux-builder': args.linux_builder,

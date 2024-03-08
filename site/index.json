@@ -3,8 +3,8 @@
     {
       "date": "2023-12-08",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:1b8be9cb5d80cde1ba8baccc52b39dffd6fe7bbff2899efbc2bbadd58d62547f",
       "openslide": "c8414a736a483ef8f2832e4ef9fd8eea94d52d31",
@@ -16,8 +16,8 @@
     {
       "date": "2023-12-09",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:1b8be9cb5d80cde1ba8baccc52b39dffd6fe7bbff2899efbc2bbadd58d62547f",
       "openslide": "c8414a736a483ef8f2832e4ef9fd8eea94d52d31",
@@ -29,8 +29,8 @@
     {
       "date": "2023-12-12",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:1b8be9cb5d80cde1ba8baccc52b39dffd6fe7bbff2899efbc2bbadd58d62547f",
       "openslide": "c8414a736a483ef8f2832e4ef9fd8eea94d52d31",
@@ -42,8 +42,8 @@
     {
       "date": "2023-12-13",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:1b8be9cb5d80cde1ba8baccc52b39dffd6fe7bbff2899efbc2bbadd58d62547f",
       "openslide": "a3f6be774b493957bc3daecada05c8931d7c7ba6",
@@ -55,8 +55,8 @@
     {
       "date": "2023-12-14",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:1b8be9cb5d80cde1ba8baccc52b39dffd6fe7bbff2899efbc2bbadd58d62547f",
       "openslide": "a3f6be774b493957bc3daecada05c8931d7c7ba6",
@@ -68,8 +68,8 @@
     {
       "date": "2023-12-16",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:1b8be9cb5d80cde1ba8baccc52b39dffd6fe7bbff2899efbc2bbadd58d62547f",
       "openslide": "7b4b8fb632cfc932cfa92a10d053d9aef93511bd",
@@ -81,8 +81,8 @@
     {
       "date": "2023-12-23",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:1b8be9cb5d80cde1ba8baccc52b39dffd6fe7bbff2899efbc2bbadd58d62547f",
       "openslide": "7b4b8fb632cfc932cfa92a10d053d9aef93511bd",
@@ -94,8 +94,8 @@
     {
       "date": "2023-12-24",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:1b8be9cb5d80cde1ba8baccc52b39dffd6fe7bbff2899efbc2bbadd58d62547f",
       "openslide": "7b4b8fb632cfc932cfa92a10d053d9aef93511bd",
@@ -107,8 +107,8 @@
     {
       "date": "2024-01-02",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:36989ad60d88e90cd8b6e581d885c0e229fad84ab41fed0822793a373c246347",
       "openslide": "2a6e087e9a007587d8705cd98460e66cde94a6f7",
@@ -120,8 +120,8 @@
     {
       "date": "2024-01-13",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:36989ad60d88e90cd8b6e581d885c0e229fad84ab41fed0822793a373c246347",
       "openslide": "adecbc88aaecdce938e54c4f46cb6450e5fb074b",
@@ -133,8 +133,8 @@
     {
       "date": "2024-01-14",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:36989ad60d88e90cd8b6e581d885c0e229fad84ab41fed0822793a373c246347",
       "openslide": "5eab2893c3b2c67e53a96ff6e73861e68a6b8697",
@@ -146,8 +146,8 @@
     {
       "date": "2024-01-16",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:36989ad60d88e90cd8b6e581d885c0e229fad84ab41fed0822793a373c246347",
       "openslide": "b2f942269ba6ccdda6bd860aae4f4260ac02ef70",
@@ -159,8 +159,8 @@
     {
       "date": "2024-01-23",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:36989ad60d88e90cd8b6e581d885c0e229fad84ab41fed0822793a373c246347",
       "openslide": "b2f942269ba6ccdda6bd860aae4f4260ac02ef70",
@@ -172,8 +172,8 @@
     {
       "date": "2024-01-30",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:36989ad60d88e90cd8b6e581d885c0e229fad84ab41fed0822793a373c246347",
       "openslide": "b2f942269ba6ccdda6bd860aae4f4260ac02ef70",
@@ -185,8 +185,8 @@
     {
       "date": "2024-01-31",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:36989ad60d88e90cd8b6e581d885c0e229fad84ab41fed0822793a373c246347",
       "openslide": "b2f942269ba6ccdda6bd860aae4f4260ac02ef70",
@@ -198,8 +198,8 @@
     {
       "date": "2024-02-02",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:11dda6105bcdf5ea4f0006ef38ec6b6a7a7c2272563ade0c51ccf579777688e4",
       "openslide": "df7e10be9c2a5e0d2e4800de7ef86a12028baf73",
@@ -211,8 +211,8 @@
     {
       "date": "2024-02-03",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:11dda6105bcdf5ea4f0006ef38ec6b6a7a7c2272563ade0c51ccf579777688e4",
       "openslide": "aa2e5b0e0677ac47aba60d8de8fcd1d6858ed8bd",
@@ -224,8 +224,8 @@
     {
       "date": "2024-02-06",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:11dda6105bcdf5ea4f0006ef38ec6b6a7a7c2272563ade0c51ccf579777688e4",
       "openslide": "aa2e5b0e0677ac47aba60d8de8fcd1d6858ed8bd",
@@ -237,8 +237,8 @@
     {
       "date": "2024-02-14",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:11dda6105bcdf5ea4f0006ef38ec6b6a7a7c2272563ade0c51ccf579777688e4",
       "openslide": "549e81b6662efe2b2285f11a5bcb31ccd7b95655",
@@ -250,8 +250,8 @@
     {
       "date": "2024-02-27",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:11dda6105bcdf5ea4f0006ef38ec6b6a7a7c2272563ade0c51ccf579777688e4",
       "openslide": "549e81b6662efe2b2285f11a5bcb31ccd7b95655",
@@ -263,8 +263,8 @@
     {
       "date": "2024-02-29",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:11dda6105bcdf5ea4f0006ef38ec6b6a7a7c2272563ade0c51ccf579777688e4",
       "openslide": "386b27f83d34f27961673a3e2f91fb9fc25b6a25",
@@ -276,8 +276,8 @@
     {
       "date": "2024-03-02",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:13c419fcb227df62c67682c278efcc52f446e7e737e00e23035b6e3d9475a978",
       "openslide": "386b27f83d34f27961673a3e2f91fb9fc25b6a25",
@@ -289,8 +289,8 @@
     {
       "date": "2024-03-03",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:13c419fcb227df62c67682c278efcc52f446e7e737e00e23035b6e3d9475a978",
       "openslide": "203ea04fa4fa3f4954bce311c6fa22666fc13320",
@@ -302,8 +302,8 @@
     {
       "date": "2024-03-04",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:13c419fcb227df62c67682c278efcc52f446e7e737e00e23035b6e3d9475a978",
       "openslide": "8823e915333033878e4c8fb7775fe61a35996a74",
@@ -315,8 +315,8 @@
     {
       "date": "2024-03-05",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:13c419fcb227df62c67682c278efcc52f446e7e737e00e23035b6e3d9475a978",
       "openslide": "33cba1997276cb1da19a1553f2146da7d03e0050",
@@ -328,8 +328,8 @@
     {
       "date": "2024-03-06",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:13c419fcb227df62c67682c278efcc52f446e7e737e00e23035b6e3d9475a978",
       "openslide": "33cba1997276cb1da19a1553f2146da7d03e0050",
@@ -341,8 +341,8 @@
     {
       "date": "2024-03-08",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:13c419fcb227df62c67682c278efcc52f446e7e737e00e23035b6e3d9475a978",
       "openslide": "c0e4405dfbefa4743e996d3d2b1465b267438ae1",
@@ -354,8 +354,8 @@
     {
       "date": "2024-03-09",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:13c419fcb227df62c67682c278efcc52f446e7e737e00e23035b6e3d9475a978",
       "openslide": "e12bdc55545d6546313bc787945bb869a933b19c",
@@ -367,8 +367,8 @@
     {
       "date": "2024-03-10",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:13c419fcb227df62c67682c278efcc52f446e7e737e00e23035b6e3d9475a978",
       "openslide": "a62f41436b8f412804a48d208bfd5430f0bbfbd0",
@@ -380,8 +380,8 @@
     {
       "date": "2024-03-11",
       "files": [
-        "source",
-        "windows-x64"
+        "-windows-x64.zip",
+        ".tar.gz"
       ],
       "linux-builder": "ghcr.io/openslide/linux-builder@sha256:13c419fcb227df62c67682c278efcc52f446e7e737e00e23035b6e3d9475a978",
       "openslide": "1de288677b5617f3b1166dba77507f62bcb2388f",
@@ -391,5 +391,5 @@
       "windows-builder": "ghcr.io/openslide/winbuild-builder@sha256:f61e53170776da855b19bfeee4b5d1560644f6e069505044a0738addb63d636d"
     }
   ],
-  "last_update": 1710139726
+  "last_update": 1710140306
 }
