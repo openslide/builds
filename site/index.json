@@ -1,19 +1,6 @@
 {
   "builds": [
     {
-      "date": "2023-12-02",
-      "files": [
-        "win64",
-        "winbuild"
-      ],
-      "linux-builder": "ghcr.io/openslide/linux-builder@sha256:1b8be9cb5d80cde1ba8baccc52b39dffd6fe7bbff2899efbc2bbadd58d62547f",
-      "openslide": "c5d6c634114a86f8873132941e7cda0dc00a8e65",
-      "openslide-bin": "c2952c84158a41b36b0ee7cb79fe6ab2168bdd74",
-      "openslide-java": "4179cdd590a7960d142e912f2cb946e4e815903f",
-      "version": "20231202-nightly",
-      "windows-builder": "ghcr.io/openslide/winbuild-builder@sha256:9ee8747971640303e75745249d1a81a0dd75d5d7fcace4b5da095d0d58a91da1"
-    },
-    {
       "date": "2023-12-03",
       "files": [
         "win64",
@@ -389,7 +376,20 @@
       "openslide-java": "4179cdd590a7960d142e912f2cb946e4e815903f",
       "version": "4.0.0.1+20240306.nightly",
       "windows-builder": "ghcr.io/openslide/winbuild-builder@sha256:043e3dc1a7a38c81def070cb93488a5c436b4573e064e2351fd24da28b487ed6"
+    },
+    {
+      "date": "2024-03-08",
+      "files": [
+        "source",
+        "windows-x64"
+      ],
+      "linux-builder": "ghcr.io/openslide/linux-builder@sha256:13c419fcb227df62c67682c278efcc52f446e7e737e00e23035b6e3d9475a978",
+      "openslide": "c0e4405dfbefa4743e996d3d2b1465b267438ae1",
+      "openslide-bin": "8da80fc222864999cd3245e24ffb91954df0c4bd",
+      "openslide-java": "4179cdd590a7960d142e912f2cb946e4e815903f",
+      "version": "4.0.0.1+20240308.nightly",
+      "windows-builder": "ghcr.io/openslide/winbuild-builder@sha256:043e3dc1a7a38c81def070cb93488a5c436b4573e064e2351fd24da28b487ed6"
     }
   ],
-  "last_update": 1709688587
+  "last_update": 1709861359
 }
