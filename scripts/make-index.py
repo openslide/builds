@@ -95,11 +95,12 @@ Builds are skipped if nothing has changed.
   {% endif %}
 {% endmacro %}
 
-{% macro artifact_link(row, suffix, desc) %}
+{% macro artifact_link(row, suffix, pysuffix, desc) %}
   {% if suffix in row.files %}
-    <a href="https://github.com/openslide/builds/releases/download/v{{ row.version }}/openslide-bin-{{ row.version }}{{ suffix }}">
-      {{ desc }}
-    </a>
+    <a href="https://github.com/openslide/builds/releases/download/v{{ row.version }}/openslide-bin-{{ row.version }}{{ suffix }}">{{ desc }}</a>
+  {% endif %}
+  {% if pysuffix and pysuffix in row.files %}
+    (<a href="https://github.com/openslide/builds/releases/download/v{{ row.version }}/openslide-bin-{{ row.version }}{{ pysuffix }}">py</a>)
   {% endif %}
 {% endmacro %}
 
@@ -136,16 +137,16 @@ Builds are skipped if nothing has changed.
       </td>
       <td class="spacer"></td>
       <td>
-        {{ artifact_link(row, '.tar.gz', 'Source') }}
+        {{ artifact_link(row, '.tar.gz', None, 'Source') }}
       </td>
       <td>
-        {{ artifact_link(row, '-windows-x64.zip', 'Windows x64') }}
+        {{ artifact_link(row, '-windows-x64.zip', '-py3-none-win_amd64.whl', 'Windows x64') }}
       </td>
       <td>
-        {{ artifact_link(row, '-macos-arm64-x86_64.tar.xz', 'macOS') }}
+        {{ artifact_link(row, '-macos-arm64-x86_64.tar.xz', '-py3-none-macosx_11_0_universal2.whl', 'macOS') }}
       </td>
       <td>
-        {{ artifact_link(row, '-linux-x86_64.tar.xz', 'Linux x86_64') }}
+        {{ artifact_link(row, '-linux-x86_64.tar.xz', '-py3-none-manylinux_2_28_x86_64.whl', 'Linux x86_64') }}
       </td>
     </tr>
   {% endfor %}

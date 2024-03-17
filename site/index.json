@@ -395,5 +395,5 @@
       "windows-builder": "ghcr.io/openslide/winbuild-builder@sha256:f61e53170776da855b19bfeee4b5d1560644f6e069505044a0738addb63d636d"
     }
   ],
-  "last_update": 1710649924
+  "last_update": 1710732240
 }
