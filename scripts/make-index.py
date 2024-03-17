@@ -145,7 +145,7 @@ Builds are skipped if nothing has changed.
         {{ artifact_link(row, '-macos-arm64-x86_64.tar.xz', 'macOS') }}
       </td>
       <td class="linux">
-        {{ artifact_link(row, '-linux-x86_64.tar.xz', 'Linux') }}
+        {{ artifact_link(row, '-linux-x86_64.tar.xz', 'Linux x86_64') }}
       </td>
     </tr>
   {% endfor %}
