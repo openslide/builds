@@ -47,7 +47,7 @@ template = Template('''<!doctype html>
   td {
     padding-right: 20px;
   }
-  td.date {
+  td:first-child {
     padding-left: 5px;
   }
   td.revision {
@@ -56,7 +56,7 @@ template = Template('''<!doctype html>
   td.spacer {
     padding-right: 25px;
   }
-  td.linux {
+  td:last-child {
     padding-right: 5px;
   }
   tr {
@@ -116,7 +116,7 @@ Builds are skipped if nothing has changed.
   </tr>
   {% for row in rows %}
     <tr>
-      <td class="date">{{ row.date }}</td>
+      <td>{{ row.date }}</td>
       <td class="revision">
         {{ revision_link('openslide', row.openslide_prev, row.openslide_cur) }}
       </td>
@@ -135,16 +135,16 @@ Builds are skipped if nothing has changed.
         {{ builder_link(row.windows_builder) }}
       </td>
       <td class="spacer"></td>
-      <td class="source">
+      <td>
         {{ artifact_link(row, '.tar.gz', 'Source') }}
       </td>
-      <td class="win64">
+      <td>
         {{ artifact_link(row, '-windows-x64.zip', 'Windows x64') }}
       </td>
-      <td class="macos">
+      <td>
         {{ artifact_link(row, '-macos-arm64-x86_64.tar.xz', 'macOS') }}
       </td>
-      <td class="linux">
+      <td>
         {{ artifact_link(row, '-linux-x86_64.tar.xz', 'Linux x86_64') }}
       </td>
     </tr>
