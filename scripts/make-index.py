@@ -100,7 +100,7 @@ Builds are skipped if nothing has changed.
     <a href="https://github.com/openslide/builds/releases/download/v{{ row.version }}/openslide-bin-{{ row.version }}{{ suffix }}">{{ desc }}</a>
   {% endif %}
   {% if pysuffix and pysuffix in row.files %}
-    (<a href="https://github.com/openslide/builds/releases/download/v{{ row.version }}/openslide-bin-{{ row.version }}{{ pysuffix }}">py</a>)
+    (<a href="https://github.com/openslide/builds/releases/download/v{{ row.version }}/openslide_bin-{{ row.version }}{{ pysuffix }}">py</a>)
   {% endif %}
 {% endmacro %}
 
