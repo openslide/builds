@@ -75,11 +75,11 @@ Older builds are automatically deleted.
 Builds are skipped if nothing has changed.
 
 {% macro revision_link(repo, prev, cur) %}
-  {% if prev %}
+  {% if prev and cur %}
     <a href="https://github.com/openslide/{{ repo }}/compare/{{ prev[:8] }}...{{ cur[:8] }}">
       {{ cur[:8] }}
     </a>
-  {% else %}
+  {% elif cur %}
     {{ cur[:8] }}
   {% endif %}
 {% endmacro %}
@@ -169,8 +169,6 @@ def main():
             help='Windows builder container reference')
     parser.add_argument('--openslide', metavar='COMMIT',
             help='commit ID for OpenSlide')
-    parser.add_argument('--java', metavar='COMMIT',
-            help='commit ID for OpenSlide Java')
     parser.add_argument('--bin', metavar='COMMIT',
             help='commit ID for openslide-bin')
     args = parser.parse_args()
@@ -189,8 +187,7 @@ def main():
     if args.version:
         if (
             not args.linux_builder or not args.windows_builder or
-            not args.openslide or not args.java or not args.bin or
-            not args.files
+            not args.openslide or not args.bin or not args.files
         ):
             parser.error('New build must be completely specified')
         records.append({
@@ -205,7 +202,7 @@ def main():
             'linux-builder': args.linux_builder,
             'windows-builder': args.windows_builder,
             'openslide': args.openslide,
-            'openslide-java': args.java,
+            'openslide-java': None,
             'openslide-bin': args.bin,
         })
 

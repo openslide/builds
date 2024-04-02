@@ -27,7 +27,6 @@ jobs:
       windows_builder_repo_and_digest: ${{ steps.find-windows.outputs.builder_repo_and_digest }}
       suffix: ${{ steps.params.outputs.suffix }}
       openslide_commit: ${{ steps.params.outputs.openslide_commit }}
-      java_commit: ${{ steps.params.outputs.java_commit }}
       bin_commit: ${{ steps.params.outputs.bin_commit }}
       changed: ${{ steps.params.outputs.changed }}
       stale: ${{ steps.params.outputs.stale }}
@@ -62,7 +61,7 @@ jobs:
               echo "Repository is stale"
               echo "stale=true" >> $GITHUB_OUTPUT
           fi
-          for repo in openslide openslide-java openslide-bin; do
+          for repo in openslide openslide-bin; do
               old=$(jq -r ".builds[-1][\"${repo}\"]" site/index.json)
               new=$(curl --no-progress-meter \
                   -H "Accept: application/vnd.github.v3+json" \
@@ -102,8 +101,6 @@ jobs:
       windows_builder_repo_and_digest: ${{ needs.setup.outputs.windows_builder_repo_and_digest }}
       openslide_repo: openslide/openslide
       openslide_ref: ${{ needs.setup.outputs.openslide_commit }}
-      openslide_java_repo: openslide/openslide-java
-      openslide_java_ref: ${{ needs.setup.outputs.java_commit }}
       openslide_bin_repo: openslide/openslide-bin
       openslide_bin_ref: ${{ needs.setup.outputs.bin_commit }}
       suffix: ${{ needs.setup.outputs.suffix }}
@@ -140,7 +137,6 @@ jobs:
               --linux-builder "${{ needs.setup.outputs.linux_builder_repo_and_digest }}" \
               --windows-builder "${{ needs.setup.outputs.windows_builder_repo_and_digest }}" \
               --openslide "${{ needs.setup.outputs.openslide_commit }}" \
-              --java "${{ needs.setup.outputs.java_commit }}" \
               --bin "${{ needs.setup.outputs.bin_commit }}"
       - name: Commit, tag, push, create release
         env:
