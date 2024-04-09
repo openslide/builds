@@ -110,8 +110,8 @@ Builds are skipped if nothing has changed.
     <th class="repo">openslide</th>
     <th class="repo">openslide-java</th>
     <th class="repo">openslide-bin</th>
-    <th class="repo">linux-builder</th>
     <th class="repo">winbuild-builder</th>
+    <th class="repo">linux-builder</th>
     <th></th>
     <th colspan="4">Downloads</th>
   </tr>
@@ -128,12 +128,12 @@ Builds are skipped if nothing has changed.
         {{ revision_link('openslide-bin', row.bin_prev, row.bin_cur) }}
       </td>
       <td class="revision">
+        {{ builder_link(row.windows_builder) }}
+      </td>
+      <td class="revision">
         {% if '-linux-x86_64.tar.xz' in row.files %}
           {{ builder_link(row.linux_builder) }}
         {% endif %}
-      </td>
-      <td class="revision">
-        {{ builder_link(row.windows_builder) }}
       </td>
       <td class="spacer"></td>
       <td>
