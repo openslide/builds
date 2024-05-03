@@ -117,7 +117,9 @@ Builds are skipped if nothing has changed.
   </tr>
   {% for row in rows %}
     <tr>
-      <td>{{ row.date }}</td>
+      <td>
+        <a href="https://github.com/openslide/builds/releases/tag/v{{ row.version }}">{{ row.date }}</a>
+      </td>
       <td class="revision">
         {{ revision_link('openslide', row.openslide_prev, row.openslide_cur) }}
       </td>
