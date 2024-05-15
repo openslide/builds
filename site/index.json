@@ -1,19 +1,6 @@
 {
   "builds": [
     {
-      "date": "2024-03-02",
-      "files": [
-        "-windows-x64.zip",
-        ".tar.gz"
-      ],
-      "linux-builder": "ghcr.io/openslide/linux-builder@sha256:13c419fcb227df62c67682c278efcc52f446e7e737e00e23035b6e3d9475a978",
-      "openslide": "386b27f83d34f27961673a3e2f91fb9fc25b6a25",
-      "openslide-bin": "2999489f7048fcc390a31b8082d29abcf12ccf5c",
-      "openslide-java": "4179cdd590a7960d142e912f2cb946e4e815903f",
-      "version": "4.0.0.1+20240302.nightly",
-      "windows-builder": "ghcr.io/openslide/winbuild-builder@sha256:043e3dc1a7a38c81def070cb93488a5c436b4573e064e2351fd24da28b487ed6"
-    },
-    {
       "date": "2024-03-03",
       "files": [
         "-windows-x64.zip",
@@ -488,7 +475,25 @@
       "openslide-java": null,
       "version": "4.0.0.3+20240514.nightly",
       "windows-builder": "ghcr.io/openslide/winbuild-builder@sha256:504c819e7955c4397dfd8a1fdfdd00770250163a02b61f7c5ae7fe72e6b24169"
+    },
+    {
+      "date": "2024-05-15",
+      "files": [
+        "-linux-x86_64.tar.xz",
+        "-macos-arm64-x86_64.tar.xz",
+        "-py3-none-macosx_11_0_universal2.whl",
+        "-py3-none-manylinux_2_28_x86_64.whl",
+        "-py3-none-win_amd64.whl",
+        "-windows-x64.zip",
+        ".tar.gz"
+      ],
+      "linux-builder": "ghcr.io/openslide/linux-builder@sha256:cede6a6e5090933dcd387fb4747b48d671f92d0551158c1a089f0c6de0d9ebf8",
+      "openslide": "010af84ac521a7f41465f9c95c48fa7a632e0d6d",
+      "openslide-bin": "92814ea36f2d6a55f60934436a860e3e07c155d0",
+      "openslide-java": null,
+      "version": "4.0.0.3+20240515.nightly",
+      "windows-builder": "ghcr.io/openslide/winbuild-builder@sha256:504c819e7955c4397dfd8a1fdfdd00770250163a02b61f7c5ae7fe72e6b24169"
     }
   ],
-  "last_update": 1715651022
+  "last_update": 1715737412
 }
