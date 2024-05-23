@@ -133,9 +133,7 @@ Builds are skipped if nothing has changed.
         {{ builder_link(row.windows_builder) }}
       </td>
       <td class="revision">
-        {% if '-linux-x86_64.tar.xz' in row.files %}
-          {{ builder_link(row.linux_builder) }}
-        {% endif %}
+        {{ builder_link(row.linux_builder) }}
       </td>
       <td class="spacer"></td>
       <td>
