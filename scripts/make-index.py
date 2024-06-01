@@ -108,7 +108,6 @@ Builds are skipped if nothing has changed.
   <tr>
     <th>Date</th>
     <th class="repo">openslide</th>
-    <th class="repo">openslide-java</th>
     <th class="repo">openslide-bin</th>
     <th class="repo">winbuild-builder</th>
     <th class="repo">linux-builder</th>
@@ -122,9 +121,6 @@ Builds are skipped if nothing has changed.
       </td>
       <td class="revision">
         {{ revision_link('openslide', row.openslide_prev, row.openslide_cur) }}
-      </td>
-      <td class="revision">
-        {{ revision_link('openslide-java', row.java_prev, row.java_cur) }}
       </td>
       <td class="revision">
         {{ revision_link('openslide-bin', row.bin_prev, row.bin_cur) }}
@@ -202,7 +198,6 @@ def main():
             'linux-builder': args.linux_builder,
             'windows-builder': args.windows_builder,
             'openslide': args.openslide,
-            'openslide-java': None,
             'openslide-bin': args.bin,
         })
 
@@ -258,8 +253,6 @@ def main():
             'windows_builder': record['windows-builder'],
             'openslide_prev': prev('openslide'),
             'openslide_cur': record['openslide'],
-            'java_prev': prev('openslide-java'),
-            'java_cur': record['openslide-java'],
             'bin_prev': prev('openslide-bin'),
             'bin_cur': record['openslide-bin'],
         })
