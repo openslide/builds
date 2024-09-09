@@ -112,7 +112,7 @@ Builds are skipped if nothing has changed.
     <th class="repo">winbuild-builder</th>
     <th class="repo">linux-builder</th>
     <th></th>
-    <th colspan="4">Downloads</th>
+    <th colspan="5">Downloads</th>
   </tr>
   {% for row in rows %}
     <tr>
@@ -143,6 +143,9 @@ Builds are skipped if nothing has changed.
       </td>
       <td>
         {{ artifact_link(row, '-linux-x86_64.tar.xz', '-py3-none-manylinux_2_28_x86_64.whl', 'Linux x86_64') }}
+      </td>
+      <td>
+        {{ artifact_link(row, '-linux-aarch64.tar.xz', '-py3-none-manylinux_2_28_aarch64.whl', 'Linux aarch64') }}
       </td>
     </tr>
   {% endfor %}
