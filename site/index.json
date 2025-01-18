@@ -1,23 +1,6 @@
 {
   "builds": [
     {
-      "date": "2024-09-03",
-      "files": [
-        "-linux-x86_64.tar.xz",
-        "-macos-arm64-x86_64.tar.xz",
-        "-py3-none-macosx_11_0_universal2.whl",
-        "-py3-none-manylinux_2_28_x86_64.whl",
-        "-py3-none-win_amd64.whl",
-        "-windows-x64.zip",
-        ".tar.gz"
-      ],
-      "linux-builder": "ghcr.io/openslide/linux-builder@sha256:22f6c97d9c79d31e5b3d72a6582c91914447d322ce285d1a9c5e7f9484f14766",
-      "openslide": "3be27fef070c50b2e129f53bdfc5540bcafce959",
-      "openslide-bin": "15b816b0d5bccc7517ad4a2e0c8a3d2392acb052",
-      "version": "4.0.0.4+20240903.nightly",
-      "windows-builder": "ghcr.io/openslide/winbuild-builder@sha256:51fa1bd087c0e4e3561ed94628e3d6c35b8f89a0b67ea578164b04947f5f029b"
-    },
-    {
       "date": "2024-09-09",
       "files": [
         "-linux-x86_64.tar.xz",
@@ -563,7 +546,26 @@
       "openslide-bin": "fb77e0c3d2b8897c29fb7d069b305011e2f49dbd",
       "version": "4.0.0.6+20250117.nightly",
       "windows-builder": "ghcr.io/openslide/winbuild-builder@sha256:06535cfb83e8ceeecf5a2a7fa8f45085d30d51177a5653800e6bfbffbc58eb2f"
+    },
+    {
+      "date": "2025-01-18",
+      "files": [
+        "-linux-aarch64.tar.xz",
+        "-linux-x86_64.tar.xz",
+        "-macos-arm64-x86_64.tar.xz",
+        "-py3-none-macosx_11_0_universal2.whl",
+        "-py3-none-manylinux_2_28_aarch64.whl",
+        "-py3-none-manylinux_2_28_x86_64.whl",
+        "-py3-none-win_amd64.whl",
+        "-windows-x64.zip",
+        ".tar.gz"
+      ],
+      "linux-builder": "ghcr.io/openslide/linux-builder@sha256:349f841e82908404fc76d665be2aa8f5915599199274a0863cc325d88b132f99",
+      "openslide": "00e7f10122dab173405b216a3b98208d3f16d63e",
+      "openslide-bin": "71aa008883b9c4c07c5bacfee22ec9271080959d",
+      "version": "4.0.0.6+20250118.nightly",
+      "windows-builder": "ghcr.io/openslide/winbuild-builder@sha256:c6a3a149ac3fc93513595dc41e602db50de1c7124dc90238dfe9cb6974de3ab7"
     }
   ],
-  "last_update": 1737074593
+  "last_update": 1737160873
 }
