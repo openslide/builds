@@ -1,25 +1,6 @@
 {
   "builds": [
     {
-      "date": "2024-11-02",
-      "files": [
-        "-linux-aarch64.tar.xz",
-        "-linux-x86_64.tar.xz",
-        "-macos-arm64-x86_64.tar.xz",
-        "-py3-none-macosx_11_0_universal2.whl",
-        "-py3-none-manylinux_2_28_aarch64.whl",
-        "-py3-none-manylinux_2_28_x86_64.whl",
-        "-py3-none-win_amd64.whl",
-        "-windows-x64.zip",
-        ".tar.gz"
-      ],
-      "linux-builder": "ghcr.io/openslide/linux-builder@sha256:a4b090d2601d8f4491e41a56f93e26a34a9685456d86ae04a3a93694d0de8586",
-      "openslide": "8bafcad21cdaf21220846d129599cc7c812d563a",
-      "openslide-bin": "9bd8332ef2c45a0a5bfee9b21cf04e8f836b762e",
-      "version": "4.0.0.6+20241102.nightly",
-      "windows-builder": "ghcr.io/openslide/winbuild-builder@sha256:fd8cb0f21d91ef87436e286d522e2958f919368165b84f72f0e315db31e2c5e7"
-    },
-    {
       "date": "2024-11-09",
       "files": [
         "-linux-aarch64.tar.xz",
@@ -569,7 +550,26 @@
       "openslide-bin": "a655716f93864e27e50382adc77f57baca83251a",
       "version": "4.0.0.6+20250411.nightly",
       "windows-builder": "ghcr.io/openslide/winbuild-builder@sha256:ac3d4c61aeab5f164c7011ea1d9e22da8db71ddb0418a4c0ea71dd6ed5c09232"
+    },
+    {
+      "date": "2025-04-15",
+      "files": [
+        "-linux-aarch64.tar.xz",
+        "-linux-x86_64.tar.xz",
+        "-macos-arm64-x86_64.tar.xz",
+        "-py3-none-macosx_11_0_universal2.whl",
+        "-py3-none-manylinux_2_28_aarch64.whl",
+        "-py3-none-manylinux_2_28_x86_64.whl",
+        "-py3-none-win_amd64.whl",
+        "-windows-x64.zip",
+        ".tar.gz"
+      ],
+      "linux-builder": "ghcr.io/openslide/linux-builder@sha256:eed89309cb79c1476f2d3990d14881274d06abd0dbf4583f00366ef9e9f83490",
+      "openslide": "e711eee4297fc4d8c161b7c67572061f955421eb",
+      "openslide-bin": "9a5fd6d3b51a9198e52ce254f1c69d6afe40a7eb",
+      "version": "4.0.0.6+20250415.nightly",
+      "windows-builder": "ghcr.io/openslide/winbuild-builder@sha256:ac3d4c61aeab5f164c7011ea1d9e22da8db71ddb0418a4c0ea71dd6ed5c09232"
     }
   ],
-  "last_update": 1744332308
+  "last_update": 1744678061
 }
