@@ -32,7 +32,7 @@ jobs:
       stale: ${{ steps.params.outputs.stale }}
     steps:
       - name: Check out repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Find Linux builder container digest
         id: find-linux
         uses: openslide/openslide-bin/.github/find-container-digest@main
@@ -114,15 +114,15 @@ jobs:
       contents: write
     steps:
       - name: Update Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: 3.12
       - name: Check out repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install dependencies
         run: sudo apt-get install python3-dateutil python3-jinja2
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v5
         with:
           pattern: "openslide[_-]bin-*"
           path: upload
@@ -184,7 +184,7 @@ jobs:
       contents: write
     steps:
       - name: Check out repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install dependencies
         run: sudo apt-get install python3-dateutil python3-jinja2
       - name: Commit and push
