@@ -122,7 +122,7 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get install python3-dateutil python3-jinja2
       - name: Download artifacts
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v6
         with:
           pattern: "openslide[_-]bin-*"
           path: upload
