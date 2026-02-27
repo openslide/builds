@@ -124,11 +124,12 @@ jobs:
           sudo apt-get update
           sudo apt-get install python3-dateutil python3-jinja2 python3-requests
       - name: Download artifacts
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v8
         with:
           pattern: "openslide[_-]bin-*"
           path: upload
           merge-multiple: true
+          skip-decompress: true
       - name: Update index
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
