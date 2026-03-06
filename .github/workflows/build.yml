@@ -32,7 +32,7 @@ jobs:
       stale: ${{ steps.params.outputs.stale }}
     steps:
       - name: Check out repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Find Linux builder container digest
         id: find-linux
         uses: openslide/openslide-bin/.github/find-container-digest@main
@@ -118,7 +118,7 @@ jobs:
         with:
           python-version: 3.14
       - name: Check out repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Install dependencies
         run: |
           sudo apt-get update
@@ -187,7 +187,7 @@ jobs:
       contents: write
     steps:
       - name: Check out repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Install dependencies
         run: |
           sudo apt-get update
