@@ -1,0 +1,12 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    commit-message:
+      prefix: workflows
+    groups:
+      deps:
+        patterns: ["*"]
+    labels: ["dependencies"]
+    schedule:
+      interval: monthly
