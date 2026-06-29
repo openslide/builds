@@ -206,8 +206,9 @@ def main():
 
     # Update records
     headers = {
-        'Accept': 'application/vnd.github.v3+json',
-        'Authorization': f'token {token}',
+        'Accept': 'application/vnd.github+json',
+        'Authorization': f'Bearer {token}',
+        'X-GitHub-Api-Version': '2026-03-10',
     }
     for record in records[:-RETAIN]:
         print(f'Deleting {record["version"]}...')

@@ -63,9 +63,10 @@ jobs:
           fi
           for repo in openslide openslide-bin; do
               old=$(jq -r ".builds[-1][\"${repo}\"]" site/index.json)
-              new=$(curl --no-progress-meter \
-                  -H "Accept: application/vnd.github.v3+json" \
-                  -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              new=$(curl --fail --no-progress-meter \
+                  -H "Accept: application/vnd.github+json" \
+                  -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+                  -H "X-GitHub-Api-Version: 2026-03-10" \
                   "https://api.github.com/repos/openslide/${repo}/commits/main" |
                   jq -r .sha)
               echo "$repo commit: https://github.com/openslide/${repo}/commit/${new:0:10}"
